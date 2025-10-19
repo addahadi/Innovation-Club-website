@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "title": "Innovation Team",
+    "subtitle": "At the University of Tiaret,\nThe Innovation Team unites creative and ambitious students to explore ideas, technology, and entrepreneurship.",
+    "subtitle_2": "Explore innovation, creativity, and technology",
+    "subtitle_3": "Through hands-on projects, teamwork, and inspiring events.",
+    "joinButton": "join"
+  },
+  "Get_to": {
+    "title": "Get to know the Innovation Team",
+    "left_content": "Founded at the University of Tiaret, the Innovation Team is a community of passionate students driven by curiosity, creativity, and collaboration. We focus on transforming ideas into impactful projects that inspire and empower the next generation of innovators.",
+    "right_content": "Join the Innovation Team to dive into the world of technology, design, and entrepreneurship! Whether you’re a coder, designer, engineer, or just eager to learn, you’ll find your place here. Take part in our workshops, challenges, and events — and be part of a community that’s shaping the future from Tiaret."
+  }
+}

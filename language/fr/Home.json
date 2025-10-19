@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "title": "Équipe d'Innovation",
+    "subtitle": "À l’Université de Tiaret,\nL’Équipe d’Innovation réunit des étudiants créatifs et ambitieux pour explorer les idées, la technologie et l’entrepreneuriat.",
+    "subtitle_2": "Explorez l’innovation, la créativité et la technologie",
+    "subtitle_3": "À travers des projets pratiques, le travail d’équipe et des événements inspirants.",
+    "joinButton": "rejoindre"
+  },
+  "Get_to": {
+    "title": "Faites connaissance avec l’Équipe d’Innovation",
+    "left_content": "Fondée à l’Université de Tiaret, l’Équipe d’Innovation est une communauté d’étudiants passionnés, animés par la curiosité, la créativité et la collaboration. Nous nous concentrons sur la transformation des idées en projets concrets qui inspirent et forment la prochaine génération d’innovateurs.",
+    "right_content": "Rejoignez l’Équipe d’Innovation pour plonger dans le monde de la technologie, du design et de l’entrepreneuriat ! Que vous soyez développeur, designer, ingénieur ou simplement curieux, vous trouverez votre place ici. Participez à nos ateliers, défis et événements — et faites partie d’une communauté qui façonne l’avenir depuis Tiaret."
+  }
+}

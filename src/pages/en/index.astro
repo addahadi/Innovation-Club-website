@@ -1,0 +1,21 @@
+---
+import SeoHeader from '../../Layouts/SeoHeader.astro';
+import Hero from '../../Components/Landing/Hero';
+import en from '../../../language/en/Home.json' assert { type: 'json' };
+import Navbar from '../../Layouts/Navbar.astro';
+import Bars from '../../Components/Ui/Bars.js';
+import About from '../../Components/Landing/About';
+
+
+import "../../styles/global.css";
+---
+
+
+<SeoHeader title="Innovation with Astro">
+	<Bars client:load/>
+	<Navbar />
+	<Hero language={en} client:load/>
+	<About  language={en} client:load/>
+</SeoHeader>
+
+
