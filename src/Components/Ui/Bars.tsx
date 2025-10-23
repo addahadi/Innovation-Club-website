@@ -24,8 +24,8 @@ function Bars() {
         ref={ref}
         className="absolute inset-0 z-30"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)`,
-          backgroundSize: "50px 50px",
+          backgroundImage: `linear-gradient(rgba(255,255,255,.05) 3px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 3px, transparent 1px)`,
+          backgroundSize: "100px 100px",
         }}
       ></div>
     );
