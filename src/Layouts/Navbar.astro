@@ -1,6 +1,21 @@
 
 ---
 import Menu from "../Components/Ui/Menu/Menu.js"
+
+const {language} = Astro.props;
+
+const menuItems = [
+  { label: language.home, ariaLabel: "Go to home page", link: "/" },
+  { label: language.about, ariaLabel: "Learn about us", link: "/about" },
+  { label: language.events, ariaLabel: "View our events", link: "/events" },
+  { label: language.contact, ariaLabel: "Get in touch", link: "/contact" },
+];
+
+const socialItems = [
+  { label: "Twitter", link: "https://twitter.com" },
+  { label: "GitHub", link: "https://github.com" },
+  { label: "LinkedIn", link: "https://linkedin.com" },
+];
 ---
 
 
@@ -9,7 +24,7 @@ import Menu from "../Components/Ui/Menu/Menu.js"
         <div class="flex flex-row-reverse gap-3 items-center">
             <img src="../../public/logo.jpg" width="70" class="rounded-full" alt="Innovation Club Logo" />
         </div>
-        <Menu client:only/>    
+        <Menu menuItems={menuItems} socialItems={socialItems} client:only/>    
     </nav>
 </header>
 

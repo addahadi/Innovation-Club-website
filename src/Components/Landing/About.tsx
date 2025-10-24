@@ -8,7 +8,7 @@ function About({
   language : Record<string , any>
 }) {
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-900 text-white mt-40">
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
         <div className="bg-neutral-950 p-12 flex flex-col justify-center">
           <h1 className="text-6xl font-bold mb-8">{language.Get_to.title}</h1>

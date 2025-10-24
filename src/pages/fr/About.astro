@@ -7,15 +7,17 @@
 import WhoWeAre from '../../Components/About/WhoWeAre';
 import Navbar from '../../Layouts/Navbar.astro';
 import SeoHeader from '../../Layouts/SeoHeader.astro';
+import fr_navbar from '../../../language/fr/Navbar.json' assert { type: 'json' };
 import "../../styles/global.css";
 import about from '../../../language/fr/About.json' assert { type: 'json' };
 import Hierarchy from '../../Components/About/Hierarchy';
+
 ---
 
 
 <SeoHeader title="À propos de nous - Innovation Club">
     <main>
-        <Navbar />
+        <Navbar language={fr_navbar} />
         <WhoWeAre language={about.Who_we_are} />
         <div class=" max-w-6xl mx-auto mt-20">
             <h2 class="text-6xl font-bold text-white mb-4">{about.Hierarchy.title}</h2>

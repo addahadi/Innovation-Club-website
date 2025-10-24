@@ -6,12 +6,10 @@ function Hero({
   language: Record<string , Record<string , string>>
 }) {
   return (
-    <div className="min-h-screen bg-neutral-950 text-white flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Grid pattern background */}
-
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+   
+      <div className="relative max-w-4xl mx-auto text-center mt-40">
         {/* Main heading */}
-        <h1 className="text-6xl md:text-8xl font-bold mb-8 tracking-tight">
+        <h1 className="text-6xl text-white md:text-8xl font-bold mb-8 tracking-tight">
           {language.hero.title}
         </h1>
 
@@ -25,15 +23,13 @@ function Hero({
         </p>
 
         <div className=" flex flex-col sm:flex-row gap-4 justify-center mb-10">
-          <button
-            className="  cursor-pointer flex flex-row gap-2 items-center border border-green-500 text-green-400 px-8 py-3 rounded hover:bg-green-700 hover:border-green-400 transition"
-          >
+          <button className="  cursor-pointer  flex flex-row gap-2 items-center border border-green-500 text-green-400 px-8 py-3 rounded hover:bg-green-700 hover:border-green-400 transition">
             {language.hero.joinButton}
             <ArrowRight size={18} />
           </button>
         </div>
       </div>
-    </div>
+   
   );
 }
 

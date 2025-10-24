@@ -1,26 +1,20 @@
 import StaggeredMenu from "./StaggeredMenu";
 
-const menuItems = [
-  { label: "Home", ariaLabel: "Go to home page", link: "/" },
-  { label: "About us", ariaLabel: "Learn about us", link: "/about" },
-  { label: "Events", ariaLabel: "View our events", link: "/events" },
-  { label: "Contact Us", ariaLabel: "Get in touch", link: "/contact" },
-];
-
-const socialItems = [
-  { label: "Twitter", link: "https://twitter.com" },
-  { label: "GitHub", link: "https://github.com" },
-  { label: "LinkedIn", link: "https://linkedin.com" },
-];
 
 
-function Menu() {
+function Menu({
+  menuItems,
+  socialItems,
+}: {
+  menuItems: { label: string; link: string }[];
+  socialItems: { label: string; link: string;}[];
+}) {
   return (
     <div className=" fixed top-0 right-0  h-screen w-[300px] z-50">
       <StaggeredMenu
         position="right"
-        items={menuItems}
-        socialItems={socialItems}
+        items={menuItems as never}
+        socialItems={socialItems  as never}
         displaySocials={true}
         displayItemNumbering={true}
         menuButtonColor="#fff"

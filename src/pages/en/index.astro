@@ -2,18 +2,30 @@
 import SeoHeader from '../../Layouts/SeoHeader.astro';
 import Hero from '../../Components/Landing/Hero';
 import en from '../../../language/en/Home.json' assert { type: 'json' };
+import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' };
 import Navbar from '../../Layouts/Navbar.astro';
 import Bars from '../../Components/Ui/Bars.js';
 import About from '../../Components/Landing/About';
 
 
 import "../../styles/global.css";
+import Squares from '../../Components/Ui/Square/Squares';
 ---
 
 
 <SeoHeader title="Innovation with Astro">
-	<Bars client:load/>
-	<Navbar />
+	<Navbar language={en_navbar} />
+	<div class=" absolute inset-0  min-h-screen w-full">
+        <Squares
+          speed={0.5}
+          squareSize={80}
+          direction="diagonal"
+          borderColor="#6B7280"
+          hoverFillColor="#15803D"
+		  client:load
+        />
+        
+      </div>
 	<Hero language={en} client:load/>
 	<About  language={en} client:load/>
 </SeoHeader>

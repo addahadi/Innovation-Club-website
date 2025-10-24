@@ -207,8 +207,8 @@ export default function ClubHierarchy() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 600 800"
-              width="100"
-              height="100"
+              width="140"
+              height="140"
             >
               <path
                 d="M300 60
