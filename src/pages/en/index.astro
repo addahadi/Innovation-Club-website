@@ -4,10 +4,9 @@ import Hero from '../../Components/Landing/Hero';
 import en from '../../../language/en/Home.json' assert { type: 'json' };
 import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' };
 import Navbar from '../../Layouts/Navbar.astro';
-import Bars from '../../Components/Ui/Bars.js';
 import About from '../../Components/Landing/About';
-
-
+import Chart from '../../Components/Chart.tsx';
+import FooterSection from '../../Layouts/Footer/FooterSection';
 import "../../styles/global.css";
 import Squares from '../../Components/Ui/Square/Squares';
 ---
@@ -20,7 +19,7 @@ import Squares from '../../Components/Ui/Square/Squares';
           speed={0.5}
           squareSize={80}
           direction="diagonal"
-          borderColor="#6B7280"
+          borderColor="#ffffff4d"
           hoverFillColor="#15803D"
 		  client:load
         />
@@ -28,6 +27,7 @@ import Squares from '../../Components/Ui/Square/Squares';
       </div>
 	<Hero language={en} client:load/>
 	<About  language={en} client:load/>
+  <FooterSection client:visible />  
 </SeoHeader>
 
 

@@ -2,5 +2,11 @@
     "home": "Accueil",
     "about": "À Propos",
     "events": "Événements",
-    "contact": "Contact"
+    "contact": "Contact",
+    "links" : {
+        "home" : "/fr",
+        "about" : "/fr/about",
+        "events" : "/fr/events",
+        "contact" : "/fr/contact"
+    }
 }

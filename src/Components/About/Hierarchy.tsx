@@ -159,7 +159,7 @@ export default function ClubHierarchy() {
   const glowIntensity = Math.min(0.2 + step * 0.1, 1);
 
   return (
-    <div className="max-w-6xl mx-auto flex flex-row items-center justify-between">
+    <div className="max-w-6xl h-screen mx-auto flex flex-row items-center justify-between">
       {/* Left Panel */}
       <div className="p-6 flex flex-col gap-3">
         <div>

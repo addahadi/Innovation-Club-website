@@ -5,10 +5,10 @@ import Menu from "../Components/Ui/Menu/Menu.js"
 const {language} = Astro.props;
 
 const menuItems = [
-  { label: language.home, ariaLabel: "Go to home page", link: "/" },
-  { label: language.about, ariaLabel: "Learn about us", link: "/about" },
-  { label: language.events, ariaLabel: "View our events", link: "/events" },
-  { label: language.contact, ariaLabel: "Get in touch", link: "/contact" },
+  { label: language.home, ariaLabel: "Go to home page", link : language.links.home },
+  { label: language.about, ariaLabel: "Learn about us", link: language.links.about },
+  { label: language.events, ariaLabel: "View our events", link: language.links.events },
+  { label: language.contact, ariaLabel: "Get in touch", link: language.links.contact },
 ];
 
 const socialItems = [

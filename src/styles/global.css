@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 body {
-    font-family: "Playfair Display SC", serif;
+    font-family: "Parkinsans", sans-serif;
 }
 
 .line {
-  stroke: rgba(255, 255, 255, 0.3);
+  stroke: #ffffff4d;
   stroke-width: 2;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.2));
 }

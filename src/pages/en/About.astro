@@ -8,6 +8,7 @@ import "../../styles/global.css";
 import about from '../../../language/en/About.json' assert { type: 'json' };
 import Hierarchy from '../../Components/About/Hierarchy';
 import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' };
+import Chart from '../../Components/Chart';
 
 ---
 
@@ -21,6 +22,7 @@ import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' }
             <p class="text-2xl text-gray-400 mb-8">{about.Hierarchy.content}</p>
         </div>
         <Hierarchy  client:load/>
+        <Chart client:load/>
     </main>
 
 </SeoHeader>    

@@ -473,6 +473,8 @@ export const StaggeredMenu = ({
                   >
                     <a
                       className="sm-panel-item relative text-white font-semibold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]"
+                      
+                    
                       href={it.link}
                       style={{ backgroundColor: "rgba(255, 255, 0, 0.2)" }}
                       aria-label={it.ariaLabel}
