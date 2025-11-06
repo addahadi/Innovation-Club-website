@@ -4,8 +4,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden text-neutral-300 rounded-2xl mb-4 p-10 md:p-16 max-w-7xl mx-auto">
-      {/* Decorative glow */}
+    <footer className="relative overflow-hidden text-neutral-300  mb-4 p-10 md:p-16   w-full">
       <div className="absolute inset-0 pointer-events-none mb-6 "></div>
 
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-16 mb-12">

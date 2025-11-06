@@ -70,7 +70,6 @@ const ElectricBorder = ({
     [...dyAnims, ...dxAnims].forEach((a) => a.setAttribute("dur", `${dur}s`));
 
     const disp = svg.querySelector("feDisplacementMap");
-    // Increased scale slightly to compensate for less octaves, also ensures it's a string
     if (disp) disp.setAttribute("scale", String(20 * (chaos || 1)));
 
     const filterEl = svg.querySelector(`#${CSS.escape(filterId)}`);
@@ -96,7 +95,6 @@ const ElectricBorder = ({
 
   useEffect(() => {
     updateAnim();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speed, chaos]);
 
   useLayoutEffect(() => {
@@ -105,7 +103,6 @@ const ElectricBorder = ({
     ro.observe(rootRef.current);
     updateAnim();
     return () => ro.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const inheritRadius = {
@@ -114,25 +111,24 @@ const ElectricBorder = ({
 
   const strokeStyle = {
     ...inheritRadius,
-    borderWidth: thickness,
-    borderStyle: "solid",
-    borderColor: color,
+    borderTopWidth: thickness,
+    borderTopStyle: "solid",
+    borderTopColor: color,
   };
 
-  // Reintroducing a small glow layer
   const smallGlowStyle = {
     ...inheritRadius,
-    borderWidth: thickness,
-    borderStyle: "solid",
-    borderColor: color,
-    filter: `blur(${1 + thickness * 0.1}px)`, // Very small blur
-    opacity: 0.3, // Low opacity
+    borderTopWidth: thickness,
+    borderTopStyle: "solid",
+    borderTopColor: color,
+    filter: `blur(${1 + thickness * 0.1}px)`,
+    opacity: 0.3,
   };
 
   return (
     <div
       ref={rootRef}
-      className={"relative isolate w-fit p-2 " + (className ?? "")}
+      className={"relative isolate p-2 " + (className ?? "")}
       style={style}
     >
       <svg
@@ -152,8 +148,8 @@ const ElectricBorder = ({
           >
             <feTurbulence
               type="turbulence"
-              baseFrequency="0.1" // Changed to 0.1
-              numOctaves="1" // Changed to 1
+              baseFrequency="0.1"
+              numOctaves="1"
               result="noise1"
               seed="1"
             />
@@ -169,8 +165,8 @@ const ElectricBorder = ({
 
             <feTurbulence
               type="turbulence"
-              baseFrequency="0.1" // Changed to 0.1
-              numOctaves="1" // Changed to 1
+              baseFrequency="0.1"
+              numOctaves="1"
               result="noise2"
               seed="1"
             />
@@ -186,8 +182,8 @@ const ElectricBorder = ({
 
             <feTurbulence
               type="turbulence"
-              baseFrequency="0.1" // Changed to 0.1
-              numOctaves="1" // Changed to 1
+              baseFrequency="0.1"
+              numOctaves="1"
               result="noise1"
               seed="2"
             />
@@ -203,8 +199,8 @@ const ElectricBorder = ({
 
             <feTurbulence
               type="turbulence"
-              baseFrequency="0.1" // Changed to 0.1
-              numOctaves="1" // Changed to 1
+              baseFrequency="0.1"
+              numOctaves="1"
               result="noise2"
               seed="2"
             />
@@ -229,7 +225,7 @@ const ElectricBorder = ({
             <feDisplacementMap
               in="SourceGraphic"
               in2="combinedNoise"
-              scale={String(20 * (chaos || 1))} // Adjusted scale
+              scale={String(20 * (chaos || 1))}
               xChannelSelector="R"
               yChannelSelector="B"
             />
@@ -246,7 +242,6 @@ const ElectricBorder = ({
           className="absolute inset-0 box-border"
           style={strokeStyle}
         />
-        {/* Small glow layer reintroduced */}
         <div className="absolute inset-0 box-border" style={smallGlowStyle} />
       </div>
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   LineChart,
   Line,
@@ -9,6 +9,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 const data = [
   { month: "Jan", events: 12, members: 145 },
@@ -26,13 +30,48 @@ const data = [
 ];
 
 export default function Chart() {
+  
+  const headingRef = useRef(null)
+  const textRef = useRef(null)
+  
+
+  useEffect(() => {
+    gsap.from(headingRef.current , {
+      scrollTrigger : {
+        start : "top 80%",
+        end:  "top 20%",
+        trigger : headingRef.current,
+        scrub : true
+      },
+      opacity : 0,
+      y : 50
+    })
+    gsap.from(textRef.current, {
+      scrollTrigger: {
+        start: "top 80%",
+        end: "top 20%",
+        trigger: textRef.current,
+        scrub: true,
+      },
+      opacity: 0,
+      y: 20,
+    });
+        return () => {
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    
+        }
+
+  }, [])
+  
+  
+  
   return (
     <div className="w-full  py-8 h-screen flex items-center mt-32 justify-center">
       <div className="w-full max-w-6xl">
-        <h2 className="text-5xl font-bold  text-white  mb-8">
+        <h2 ref={headingRef} className="text-5xl font-bold  text-white  mb-8">
           Events & Members Over Time
         </h2>
-        <p className="text-xl text-gray-400 mb-8">
+        <p  ref={textRef} className="text-xl text-gray-400 mb-8">
           Track the growth of events and member count throughout the year
         </p>
 

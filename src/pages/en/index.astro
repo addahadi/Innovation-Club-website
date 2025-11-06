@@ -5,10 +5,14 @@ import en from '../../../language/en/Home.json' assert { type: 'json' };
 import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' };
 import Navbar from '../../Layouts/Navbar.astro';
 import About from '../../Components/Landing/About';
-import Chart from '../../Components/Chart.tsx';
+import Chart from '../../Components/About/Chart.tsx';
 import FooterSection from '../../Layouts/Footer/FooterSection';
 import "../../styles/global.css";
-import Squares from '../../Components/Ui/Square/Squares';
+import Squares from '../../Components/Ui/Squares.jsx';
+import CarouselEvent from '../../Components/Events/CarouselEvent.jsx';
+import FAQ from '../../Components/Faq.tsx';
+
+
 ---
 
 
@@ -27,6 +31,8 @@ import Squares from '../../Components/Ui/Square/Squares';
       </div>
 	<Hero language={en} client:load/>
 	<About  language={en} client:load/>
+  <CarouselEvent client:load/>
+  <FAQ client:load/>
   <FooterSection client:visible />  
 </SeoHeader>
 

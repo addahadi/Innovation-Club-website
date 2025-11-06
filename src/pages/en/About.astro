@@ -8,7 +8,9 @@ import "../../styles/global.css";
 import about from '../../../language/en/About.json' assert { type: 'json' };
 import Hierarchy from '../../Components/About/Hierarchy';
 import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' };
-import Chart from '../../Components/Chart';
+import Chart from '../../Components/About/Chart';
+import ValuesComponent from '../../Components/About/OurValues';
+import FooterSection from '../../Layouts/Footer/FooterSection';
 
 ---
 
@@ -23,6 +25,8 @@ import Chart from '../../Components/Chart';
         </div>
         <Hierarchy  client:load/>
         <Chart client:load/>
+        <ValuesComponent client:load/>
+        <FooterSection client:load />
     </main>
 
 </SeoHeader>    

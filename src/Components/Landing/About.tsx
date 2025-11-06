@@ -15,7 +15,6 @@ function About({ language }: AboutProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
 
     // Timeline for left side
     const leftTl = gsap.timeline({
@@ -23,7 +22,7 @@ function About({ language }: AboutProps) {
         trigger: titleRef.current,
         start: "top 80%",
         end: "bottom 20%",
-        toggleActions: "play none none reverse",
+        scrub : true
       },
     });
 
@@ -62,7 +61,7 @@ function About({ language }: AboutProps) {
         trigger: rightImageRef.current,
         start: "top 80%",
         end: "bottom 20%",
-        toggleActions: "play none none reverse",
+        scrub : true
       },
     });
 

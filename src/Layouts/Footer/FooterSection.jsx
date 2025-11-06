@@ -52,34 +52,17 @@ export default function FooterSection() {
   */
 
   return (
-    <div className="w-full flex flex-col justify-center items-center mt-32 relative">
-      <div className="max-w-6xl w-full px-6 flex flex-col relative">
-        {/*<div className="flex justify-between w-full relative">
-          <img
-            src="/logo.jpg"
-            alt="Graphy Logo"
-            className="mb-6 w-32 h-32 object-contain rounded-full border-4 border-green-500 shadow-lg z-10"
-          />
-
-          <canvas
-            ref={canvasRef}
-            className="absolute top-32 left-16 w-[2px] h-[24px] pointer-events-none"
-          ></canvas>
-          <div></div>
-        </div>
-        */}
-
+    <div className="w-full mt-32">
         <ElectricBorder
           color="#37f04a"
           speed={0.2}
           chaos={0.4}
           thickness={3}
-          style={{ borderRadius: 16 }}
+          style={{ borderRadius: 0 }}
           client:visible
         >
           <Footer />
         </ElectricBorder>
       </div>
-    </div>
   );
 }

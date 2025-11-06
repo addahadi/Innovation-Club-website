@@ -1,6 +1,9 @@
-import gsap from "gsap";
+import {gsap} from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const members = [
   {
@@ -54,16 +57,12 @@ const members = [
 export default function ClubHierarchy() {
   const [step, setStep] = useState(0);
 
-  // 🔗 Refs for DOM elements
+  // Refs
   const svgRef = useRef<SVGSVGElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const taskRef = useRef<HTMLParagraphElement>(null);
-
-  // 🎬 Refs for tweens (persistent GSAP animations)
-  const nameTweenRef = useRef<gsap.core.Tween | null>(null);
-  const imgTweenRef = useRef<gsap.core.Tween | null>(null);
-  const taskTweenRef = useRef<gsap.core.Tween | null>(null);
 
   const connections = [
     [0, 1],
@@ -88,11 +87,64 @@ export default function ClubHierarchy() {
     8: { x: 570, y: 420 },
   };
 
+  // ✨ scroll-based fade for the text and image (like OurValues)
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const nameEl = nameRef.current;
+    const taskEl = taskRef.current;
+    const imgEl = imgRef.current;
+
+    // name
+    gsap.from(nameEl, {
+      scrollTrigger: {
+        trigger: nameEl,
+        start: "top 85%",
+        end: "top 30%",
+        scrub: true,
+      },
+      opacity: 0,
+      x: -40,
+      duration: 0.8,
+    });
+
+    // text
+    gsap.from(taskEl, {
+      scrollTrigger: {
+        trigger: taskEl,
+        start: "top 90%",
+        end: "top 30%",
+        scrub: true,
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+    });
+
+    // image
+    gsap.from(imgEl, {
+      scrollTrigger: {
+        trigger: imgEl,
+        start: "top 90%",
+        end: "top 30%",
+        scrub: true,
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power2.out",
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
+  // Draw lines based on step
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
     svg.innerHTML = "";
-
     connections.forEach(([from, to], index) => {
       const { x: x1, y: y1 } = positions[from];
       const { x: x2, y: y2 } = positions[to];
@@ -111,55 +163,62 @@ export default function ClubHierarchy() {
     });
   }, [step]);
 
-  // 🎞️ Initialize tweens once
+  // GSAP intro animations for content
   useEffect(() => {
-    const nameEl = nameRef.current;
-    const imgEl = imgRef.current;
-    const taskEl = taskRef.current;
+    if (!sectionRef.current) return;
 
-    if (!nameEl || !imgEl || !taskEl) return;
-
-    nameTweenRef.current = gsap.from(nameEl, {
-      x: -20,
-      opacity: 0,
-      duration: 0.5,
-      paused: true,
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 85%",
+        end: "top 20%",
+        scrub: true,
+      },
     });
 
-    imgTweenRef.current = gsap.from(imgEl, {
-      scale: 0.9,
+    tl.from(sectionRef.current.querySelector("img"), {
       opacity: 0,
-      duration: 0.6,
+      y: 50,
+      duration: 1,
       ease: "power2.out",
-      paused: true,
-    });
-
-    taskTweenRef.current = gsap.from(taskEl, {
-      y: 10,
-      opacity: 0,
-      duration: 0.5,
-      delay: 0.1,
-      paused: true,
-    });
+    })
+      .from(sectionRef.current.querySelector("h2"), {
+        opacity: 0,
+        x: -30,
+        duration: 0.8,
+      })
+      .from(sectionRef.current.querySelector("p"), {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+      })
+      .from(sectionRef.current.querySelector(".tree-area"), {
+        opacity: 0,
+        scale: 0.95,
+        duration: 1,
+      });
 
     return () => {
-      nameTweenRef.current?.kill();
-      imgTweenRef.current?.kill();
-      taskTweenRef.current?.kill();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
-  // 💫 Replay animations when step changes
+  // Animate name/img/task on step change
   useEffect(() => {
-    nameTweenRef.current?.restart();
-    imgTweenRef.current?.restart();
-    taskTweenRef.current?.restart();
+    gsap.fromTo(
+      [nameRef.current, imgRef.current, taskRef.current],
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: "power2.out" }
+    );
   }, [step]);
 
   const glowIntensity = Math.min(0.2 + step * 0.1, 1);
 
   return (
-    <div className="max-w-6xl h-screen mx-auto flex flex-row items-center justify-between">
+    <div
+      ref={sectionRef}
+      className="max-w-6xl h-screen mx-auto flex flex-row items-center justify-between py-20 px-6"
+    >
       {/* Left Panel */}
       <div className="p-6 flex flex-col gap-3">
         <div>
@@ -185,7 +244,7 @@ export default function ClubHierarchy() {
       </div>
 
       {/* Tree Container */}
-      <div className="w-full flex-col justify-center items-center py-10">
+      <div className="tree-area w-full flex-col justify-center items-center py-10">
         <div className="relative w-[700px] h-[550px] bg-neutral-900 rounded-2xl shadow-lg overflow-visible">
           <svg
             ref={svgRef}

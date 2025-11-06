@@ -362,7 +362,7 @@ export const StaggeredMenu = ({
 
   return (
     <div
-      className={`sm-scope z-40 ${
+      className={`sm-scope z-40 pointer-events-none ${
         isFixed
           ? "fixed top-0 left-0 w-screen h-screen overflow-hidden"
           : "w-full h-full"
@@ -379,7 +379,7 @@ export const StaggeredMenu = ({
       >
         <div
           ref={preLayersRef}
-          className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[5]"
+          className="sm-prelayers absolute top-0 right-0 bottom-0 z-[5]"
           aria-hidden="true"
         >
           {(() => {
@@ -403,7 +403,7 @@ export const StaggeredMenu = ({
         </div>
 
         <header
-          className="staggered-menu-header absolute top-0 left-0 w-full flex-row-reverse items-center justify-between p-[2em] bg-transparent pointer-events-none z-20"
+          className="staggered-menu-header absolute top-0 left-0 w-full flex-row-reverse items-center justify-between p-[2em] bg-transparent z-20"
           aria-label="Main navigation header"
         >
           <button
@@ -455,7 +455,7 @@ export const StaggeredMenu = ({
         <aside
           id="staggered-menu-panel"
           ref={panelRef}
-          className="staggered-menu-panel absolute top-0 right-0 h-full bg-neutral-950 flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-10 backdrop-blur-[12px]"
+          className="staggered-menu-panel absolute top-0 right-0 h-full bg-neutral-950 flex flex-col p-[6em_2em_2em_2em] overflow-y-auto z-10 backdrop-blur-[12px] pointer-events-auto"
           style={{ WebkitBackdropFilter: "blur(12px)" }}
           aria-hidden={!open}
         >
@@ -473,10 +473,7 @@ export const StaggeredMenu = ({
                   >
                     <a
                       className="sm-panel-item relative text-white font-semibold text-[4rem] cursor-pointer leading-none tracking-[-2px] uppercase transition-[background,color] duration-150 ease-linear inline-block no-underline pr-[1.4em]"
-                      
-                    
                       href={it.link}
-                      style={{ backgroundColor: "rgba(255, 255, 0, 0.2)" }}
                       aria-label={it.ariaLabel}
                       data-index={idx + 1}
                     >
@@ -533,7 +530,7 @@ export const StaggeredMenu = ({
 
       <style>{`
 .sm-scope .staggered-menu-wrapper { position: relative; width: 100%; height: 100%; z-index: 40; }
-.sm-scope .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 2em; background: transparent; pointer-events: none; z-index: 20; }
+.sm-scope .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 2em; background: transparent; z-index: 20; }
 .sm-scope .staggered-menu-header > * { pointer-events: auto; }
 .sm-scope .sm-logo { display: flex; align-items: center; user-select: none; }
 .sm-scope .sm-logo-img { display: block; height: 32px; width: auto; object-fit: contain; }
