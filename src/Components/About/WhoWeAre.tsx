@@ -39,25 +39,15 @@ export default function WhoWeAre({
     
       }, [])
     return (
-         <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 
-          ref={headingRef}
-          
-          className="text-6xl font-bold text-white mb-8">
+      <div className="min-h-[60vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto py-12 sm:py-16 lg:py-20">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8">
             {language.title}
-          </h2>
-          
-          <p 
-
-          ref={textRef}
-          className="text-2xl text-gray-400 mb-8 leading-relaxed ">
-            {
-              language.content
-            }
+          </h1>
+          <p className="text-base  sm:text-lg lg:text-xl text-gray-400 leading-relaxed max-w-4xl">
+            {language.content}
           </p>
-
         </div>
-      </section>
-    )
+      </div>
+    );
 }

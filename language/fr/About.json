@@ -1,10 +1,44 @@
 {
-    "Who_we_are" : {
-        "title": "Qui nous sommes",
-        "content": "We are a team of passionate innovators driven by creativity, curiosity, and a shared vision to build meaningful solutions that transform the way people work, learn, and connect. What began as a small group of ambitious thinkers has evolved into a dynamic organization where ideas come to life through collaboration, technology, and purpose.Our mission is to make technology not only accessible but truly impactful — empowering individuals and communities to achieve more through innovation. We believe in excellence, continuous learning, and the power of teamwork to turn bold ideas into reality. Every project we take on reflects our dedication to shaping a smarter, more connected world where innovation drives progress and positive change."
-    },
-    "Hierarchy": {
-        "title": "Hiérarchie de Innovation",
-        "content": "Notre structure hiérarchique favorise la collaboration et l'innovation à tous les niveaux. Chaque membre joue un rôle essentiel dans la réalisation de notre mission."
-    }
+  "Qui_nous_sommes": {
+    "title": "Qui Nous Sommes",
+    "content": "Nous sommes une équipe d'innovateurs passionnés animés par la créativité, la curiosité et une vision commune visant à créer des solutions significatives qui transforment la façon dont les gens travaillent, apprennent et se connectent. Ce qui a commencé comme un petit groupe de penseurs ambitieux a évolué en une organisation dynamique où les idées prennent vie grâce à la collaboration, la technologie et un objectif commun. Notre mission est de rendre la technologie non seulement accessible mais véritablement impactante — en permettant aux individus et aux communautés d'accomplir davantage grâce à l'innovation. Nous croyons en l'excellence, l'apprentissage continu et le pouvoir du travail d'équipe pour transformer des idées audacieuses en réalité. Chaque projet que nous entreprenons reflète notre dévouement à façonner un monde plus intelligent et plus connecté où l'innovation stimule le progrès et le changement positif."
+  },
+  "Hierarchie": {
+    "title": "Hiérarchie de l'Innovation",
+    "content": "Notre structure hiérarchique favorise la collaboration et l'innovation à tous les niveaux. Chaque membre joue un rôle essentiel dans l'accomplissement de notre mission."
+  },
+  "Evenements_et_Membres": {
+    "title": "Événements et Membres au Fil du Temps",
+    "content": "Suivez la croissance des événements et le nombre de membres tout au long de l'année"
+  },
+  "Nos_Valeurs": {
+    "title": "Nos Valeurs",
+    "content": "Ces principes fondamentaux guident nos actions, nos décisions et notre façon de travailler ensemble pour atteindre notre mission.",
+    "values": [
+      {
+        "name": "Innovation",
+        "description": "Nous repoussons constamment les limites, en pensant à repousser les frontières et explorer de nouvelles possibilités dans la technologie."
+      },
+      {
+        "name": "Collaboration",
+        "description": "Nous croyons au pouvoir du travail d'équipe, où diverses perspectives s'unissent pour créer des solutions extraordinaires."
+      },
+      {
+        "name": "Excellence",
+        "description": "Nous nous engageons à la plus haute qualité dans tout ce que nous faisons, en apprenant et en améliorant continuellement notre savoir-faire."
+      },
+      {
+        "name": "Impact",
+        "description": "Nous nous concentrons sur la création d'un changement significatif qui responsabilise les individus et les communautés grâce à la technologie."
+      },
+      {
+        "name": "Passion",
+        "description": "Nous sommes animés par un enthousiasme sincère pour la technologie et son potentiel à transformer le monde pour le meilleur."
+      },
+      {
+        "name": "Intégrité",
+        "description": "Nous maintenons l'honnêteté, la transparence et des pratiques éthiques dans tous nos projets et interactions."
+      }
+    ]
+  }
 }

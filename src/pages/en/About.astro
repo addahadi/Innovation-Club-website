@@ -11,22 +11,53 @@ import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' }
 import Chart from '../../Components/About/Chart';
 import ValuesComponent from '../../Components/About/OurValues';
 import FooterSection from '../../Layouts/Footer/FooterSection';
-
+import en from '../../../language/en/Home.json' assert { type: 'json' };
 ---
 
 
-<SeoHeader title="À propos de nous - Innovation Club">
-    <main>
-        <Navbar language={en_navbar} />
-        <WhoWeAre language={about.Who_we_are} />
-        <div class=" max-w-6xl mx-auto mt-20">
-            <h2 class="text-6xl font-bold text-white mb-4">{about.Hierarchy.title}</h2>
-            <p class="text-2xl text-gray-400 mb-8">{about.Hierarchy.content}</p>
-        </div>
-        <Hierarchy  client:load/>
-        <Chart client:load/>
-        <ValuesComponent client:load/>
-        <FooterSection client:load />
-    </main>
+---
+// ...existing imports...
+---
 
-</SeoHeader>    
+---
+// ...existing imports...
+---
+
+<SeoHeader title="À propos de nous - Innovation Club">
+    <main class="min-h-screen bg-zinc-950">
+        <Navbar language={en_navbar} />
+        {/* Use flex column with consistent spacing */}
+        <div class="flex flex-col">
+            {/* Hero Section - WhoWeAre */}
+            <section class="mb-24 sm:mb-32">
+                <WhoWeAre language={about.Who_we_are} />
+            </section>
+
+            {/* Hierarchy Section */}
+            <section class="mb-24 sm:mb-32">
+                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+                        {about.Hierarchy.title}
+                    </h2>
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-400 mb-8 sm:mb-12">
+                        {about.Hierarchy.content}
+                    </p>
+                </div>
+                <Hierarchy language={about.Hierarchy} client:load />
+            </section>
+
+            {/* Chart Section */}
+            <section class="mb-24 sm:mb-32">
+                <Chart language={about.Events_and_Members} client:load />
+            </section>
+
+            {/* Values Section */}
+            <section class="mb-24 sm:mb-32">
+                <ValuesComponent language={about.Our_Values} client:load />
+            </section>
+
+            {/* Footer */}
+            <FooterSection language={en} client:load />
+        </div>
+    </main>
+</SeoHeader>

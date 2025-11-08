@@ -9,18 +9,20 @@ import About from '../../Components/Landing/About';
 
 import "../../styles/global.css";
 import Squares from '../../Components/Ui/Squares';
+import CarouselEvent from '../../Components/Events/CarouselEvent';
+import FAQ from '../../Components/Faq';
+import FooterSection from '../../Layouts/Footer/FooterSection';
 ---
 
 
 <SeoHeader title="Innovation with Astro">
-
 	<Navbar language={fr_navbar} />
 	<div class=" absolute inset-0  min-h-screen w-full">
         <Squares
           speed={0.5}
           squareSize={80}
           direction="diagonal"
-          borderColor=""
+          borderColor="#ffffff4d"
           hoverFillColor="#15803D"
 		  client:load
         />
@@ -28,6 +30,9 @@ import Squares from '../../Components/Ui/Squares';
       </div>
 	<Hero language={fr} client:load/>
 	<About  language={fr} client:load/>
+  <CarouselEvent language={fr} client:load/>
+  <FAQ language ={fr} client:load/>
+  <FooterSection language={fr} client:visible />  
 </SeoHeader>
 
 

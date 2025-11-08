@@ -12,20 +12,26 @@ import "../../styles/global.css";
 import about from '../../../language/fr/About.json' assert { type: 'json' };
 import Hierarchy from '../../Components/About/Hierarchy';
 import Chart from '../../Components/About/Chart';
+import ValuesComponent from '../../Components/About/OurValues';
+import FooterSection from '../../Layouts/Footer/FooterSection';
+import fr from '../../../language/fr/Home.json' assert { type: 'json' };
 
 ---
+
 
 
 <SeoHeader title="À propos de nous - Innovation Club">
     <main>
         <Navbar language={fr_navbar} />
-        <WhoWeAre language={about.Who_we_are} />
+        <WhoWeAre language={about.Qui_nous_sommes} />
         <div class=" max-w-6xl mx-auto mt-20">
-            <h2 class="text-6xl font-bold text-white mb-4">{about.Hierarchy.title}</h2>
-            <p class="text-2xl text-gray-400 mb-8">{about.Hierarchy.content}</p>
+            <h2 class="text-6xl font-bold text-white mb-4">{about.Hierarchie.title}</h2>
+            <p class="text-2xl text-gray-400 mb-8">{about.Hierarchie.content}</p>
         </div>
-        <Hierarchy  client:load/>
-        <Chart client:load/>
+        <Hierarchy language={about.Hierarchie}  client:load/>
+        <Chart language={about.Evenements_et_Membres} client:load/>
+        <ValuesComponent language={about.Nos_Valeurs} client:load/>
+        <FooterSection language={fr} client:load />
     </main>
 
 </SeoHeader>    

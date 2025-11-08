@@ -1,139 +1,118 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Lightbulb, Users, Target, Rocket, Heart, Award } from "lucide-react";
 
+import { Lightbulb, Users, Target, Rocket, Heart, Award } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
-const ValuesComponent = () => {
+interface ValueProps {
+  language: {
+    title: string;
+    content: string;
+    values: Array<{
+      name: string;
+      description: string;
+    }>;
+  };
+}
+
+const iconMap = {
+  Innovation: Lightbulb,
+  Collaboration: Users,
+  Excellence: Target,
+  Impact: Rocket,
+  Passion: Heart,
+  Integrity: Award,
+} as const;
+
+
+const ValuesComponent: React.FC<ValueProps> = ({ language }) => {
   const sectionRef = useRef(null);
-  const headingRef = useRef(null)
-  const textRef = useRef(null)
-  const values = [
-    {
-      icon: Lightbulb,
-      title: "Innovation",
-      description:
-        "We embrace creativity and bold thinking to push boundaries and explore new possibilities in technology.",
-    },
-    {
-      icon: Users,
-      title: "Collaboration",
-      description:
-        "We believe in the power of teamwork, where diverse perspectives unite to create extraordinary solutions.",
-    },
-    {
-      icon: Target,
-      title: "Excellence",
-      description:
-        "We strive for the highest quality in everything we do, continuously learning and improving our craft.",
-    },
-    {
-      icon: Rocket,
-      title: "Impact",
-      description:
-        "We focus on creating meaningful change that empowers individuals and communities through technology.",
-    },
-    {
-      icon: Heart,
-      title: "Passion",
-      description:
-        "We are driven by genuine enthusiasm for technology and its potential to transform the world around us.",
-    },
-    {
-      icon: Award,
-      title: "Integrity",
-      description:
-        "We maintain honesty, transparency, and ethical practices in all our projects and interactions.",
-    },
-  ];
-  
-  useEffect(() => {
-    const cards = gsap.utils.toArray(".value-card");
+  const headingRef = useRef(null);
+  const textRef = useRef(null);
 
+  const iconMap = {
+    Innovation: Lightbulb,
+    Collaboration: Users,
+    Excellence: Target,
+    Impact: Rocket,
+    Passion: Heart,
+    Integrity: Award,
+  };
 
-    gsap.from(headingRef.current , {
-        scrollTrigger : {
-        start : "top 80%",
-        end:  "top 20%",
-        trigger : headingRef.current,
-        scrub : true
-        },
-        opacity : 0,
-        y : 50
-    })
+useEffect(() => {
+  const cards = gsap.utils.toArray(".value-card");
 
+  gsap.from(headingRef.current, {
+    scrollTrigger: {
+      start: "top 80%",
+      end: "top 20%",
+      trigger: headingRef.current,
+      scrub: true,
+    },
+    opacity: 0,
+    y: 50,
+  });
 
-    gsap.from(textRef.current, {
-        scrollTrigger: {
-        start: "top 80%",
-        end: "top 20%",
-        trigger: textRef.current,
-        scrub: true,
-        },
-        opacity: 0,
-        y: 20,
-    });
+  gsap.from(textRef.current, {
+    scrollTrigger: {
+      start: "top 80%",
+      end: "top 20%",
+      trigger: textRef.current,
+      scrub: true,
+    },
+    opacity: 0,
+    y: 20,
+  });
 
-    gsap.from(cards, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
+  gsap.from(cards, {
+    opacity: 0,
+    y: 50,
+    duration: 1,
 
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        end : "top 20%",
-        scrub : true
-      },
-    });
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+    scrollTrigger: {
+      trigger: sectionRef.current,
+      start: "top 80%",
+      end: "top 20%",
+      scrub: true,
+    },
+  });
+  return () => {
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  };
+}, []);
+
 
   return (
-    <div ref={sectionRef} className="w-full text-white py-20 px-6">
+    <div ref={sectionRef} className="w-full text-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="mb-16 text-center md:text-left">
-          <h2 
-          
-          ref={headingRef}
-          className="text-5xl font-bold mb-6">Our Values</h2>
-          <p 
-          ref={textRef}
-          
-          className="text-gray-400 text-lg max-w-3xl mx-auto md:mx-0">
-            These core principles guide our actions, decisions, and the way we
-            work together to achieve our mission.
+        <div className="mb-12 sm:mb-16 text-center lg:text-left">
+          <h2 ref={headingRef} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
+            {language.title}
+          </h2>
+          <p ref={textRef} className="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto lg:mx-0">
+            {language.content}
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, i) => {
-            const Icon = value.icon;
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {language.values.map((value, i) => {
+            const IconComponent = iconMap[value.name as keyof typeof iconMap];
+            if (!IconComponent) return null;
+
             return (
-              <div
-                key={i}
-                className="value-card bg-zinc-900 rounded-lg p-8 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800 transition-all duration-300 group"
-              >
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-lg bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors duration-300">
-                    <Icon
-                      className="w-7 h-7 text-emerald-500"
-                      strokeWidth={2}
-                    />
+              <div key={i} className="value-card bg-zinc-900 rounded-lg p-6 sm:p-8 border border-zinc-800 hover:border-emerald-500/50 hover:bg-zinc-800 transition-all duration-300 group">
+                <div className="mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                    <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-500" strokeWidth={2} />
                   </div>
                 </div>
-
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-emerald-500 transition-colors duration-300">
-                  {value.title}
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">
+                  {value.name}
                 </h3>
-                <p className="text-gray-400">{value.description}</p>
-
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 group-hover:w-full transition-all duration-500"></div>
+                <p className="text-sm sm:text-base text-gray-400">
+                  {value.description}
+                </p>
               </div>
             );
           })}

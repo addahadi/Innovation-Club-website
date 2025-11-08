@@ -9,6 +9,57 @@
   "Get_to": {
     "title": "Get to know the Innovation Team",
     "left_content": "Founded at the University of Tiaret, the Innovation Team is a community of passionate students driven by curiosity, creativity, and collaboration. We focus on transforming ideas into impactful projects that inspire and empower the next generation of innovators.",
-    "right_content": "Join the Innovation Team to dive into the world of technology, design, and entrepreneurship! Whether you’re a coder, designer, engineer, or just eager to learn, you’ll find your place here. Take part in our workshops, challenges, and events — and be part of a community that’s shaping the future from Tiaret."
+    "right_content": "Join the Innovation Team to dive into the world of technology, design, and entrepreneurship! Whether you're a coder, designer, engineer, or just eager to learn, you'll find your place here. Take part in our workshops, challenges, and events — and be part of a community that's shaping the future from Tiaret."
+  },
+  "Events": {
+    "title": "Innovation Events",
+    "description": "Learn more about our exciting events — from workshops and hackathons to talks and conferences. Each event helps students share ideas, build new projects, and learn more about innovation together.",
+    "carousel": [
+      {
+        "title": "Synapse Festival",
+        "description": "Breathtaking mountain scenery",
+        "slide": "1/3"
+      }
+    ]
+  },
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "questions": [
+      {
+        "question": "What is our club about?"
+      },
+      {
+        "question": "How can I join the club?"
+      },
+      {
+        "question": "Do I need prior experience to join?"
+      },
+      {
+        "question": "When and where do we meet?"
+      }
+    ]
+  },
+  "Footer": {
+    "location": {
+      "title": "Location",
+      "address": "Tiaret, Algeria",
+      "university": "University Ibn Khaldoun"
+    },
+    "contact": {
+      "title": "Get in touch",
+      "phone": "+213 (24) 567-890",
+      "email": "hello@gdgty.com"
+    },
+    "navigation": {
+      "title": "Navigation",
+      "links": ["Home", "About", "Events", "Contact"]
+    },
+    "socials": {
+      "title": "Socials",
+      "platforms": ["Instagram", "TikTok", "LinkedIn"]
+    },
+    "menu_button": "Menu",
+    "copyright": "© 2025 Imagify. All rights reserved.",
+    "legal_links": ["Privacy Policy", "Terms of Service", "Cookies Settings"]
   }
 }

@@ -1,113 +1,118 @@
-import React from "react";
-
-const Footer = () => {
+const Footer = ({ language }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden text-neutral-300  mb-4 p-10 md:p-16   w-full">
-      <div className="absolute inset-0 pointer-events-none mb-6 "></div>
+    <footer className="relative overflow-hidden text-neutral-300  mb-4 p-10 md:p-16 w-full">
+      <div className="absolute inset-0 pointer-events-none mb-6"></div>
 
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-16 mb-12">
-        {/* Location */}
         <div className="flex flex-col gap-5">
-          <h3 className="text-white font-semibold text-xl">Location</h3>
+          <h3 className="text-white font-semibold text-xl">
+            {language.Footer.location.title}
+          </h3>
           <p className="text-neutral-400 leading-relaxed">
-            Tiaret, Algeria <br />
-            University Ibn Khaldoun
+            {language.Footer.location.address} <br />
+            {language.Footer.location.university}
           </p>
         </div>
 
-        {/* Contact */}
         <div>
-          <h3 className="text-white font-semibold text-xl mb-4">Get in touch</h3>
+          <h3 className="text-white font-semibold text-xl mb-4">
+            {language.Footer.contact.title}
+          </h3>
           <ul className="space-y-3">
             <li>
               <a
-                href="tel:+1234567890"
+                href={`tel:${language.Footer.contact.phone.replace(/\s/g, "")}`}
                 className="hover:text-white transition-colors flex items-center gap-2"
               >
-                <span role="img" aria-label="phone">📞</span> +1 (234) 567-890
+                <span role="img" aria-label="phone">
+                  📞
+                </span>{" "}
+                {language.Footer.contact.phone}
               </a>
             </li>
             <li>
               <a
-                href="mailto:hello@graphy.com"
+                href={`mailto:${language.Footer.contact.email}`}
                 className="hover:text-white transition-colors flex items-center gap-2"
               >
-                <span role="img" aria-label="mail">✉️</span> hello@graphy.com
+                <span role="img" aria-label="mail">
+                  ✉️
+                </span>{" "}
+                {language.Footer.contact.email}
               </a>
             </li>
           </ul>
         </div>
-
-        {/* Navigation */}
         <div>
-          <h3 className="text-white font-semibold text-xl mb-4">Navigation</h3>
+          <h3 className="text-white font-semibold text-xl mb-4">
+            {language.Footer.navigation.title}
+          </h3>
           <ul className="space-y-3">
-            <li><a href="/" className="hover:text-white transition-colors">Home</a></li>
-            <li><a href="/about" className="hover:text-white transition-colors">About</a></li>
-            <li><a href="/events" className="hover:text-white transition-colors">Events</a></li>
-            <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
+            {language.Footer.navigation.links.map((link, index) => (
+              <li key={index}>
+                <a
+                  href={index === 0 ? "/" : `/${link.toLowerCase()}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {link}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Socials */}
         <div>
-          <h3 className="text-white font-semibold text-xl mb-4">Socials</h3>
+          <h3 className="text-white font-semibold text-xl mb-4">
+            {language.Footer.socials.title}
+          </h3>
           <ul className="space-y-3">
-            <li>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors flex items-center gap-2"
-              >
-                <span role="img" aria-label="instagram">📸</span> Instagram
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors flex items-center gap-2"
-              >
-                <span role="img" aria-label="tiktok">🎵</span> TikTok
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors flex items-center gap-2"
-              >
-                <span role="img" aria-label="linkedin">💼</span> LinkedIn
-              </a>
-            </li>
+            {language.Footer.socials.platforms.map((platform, index) => {
+              const platformData = {
+                Instagram: { icon: "📸", url: "https://instagram.com" },
+                TikTok: { icon: "🎵", url: "https://tiktok.com" },
+                LinkedIn: { icon: "💼", url: "https://linkedin.com" },
+              };
+
+              const data = platformData[platform];
+
+              return (
+                <li key={index}>
+                  <a
+                    href={data?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    <span role="img" aria-label={platform.toLowerCase()}>
+                      {data?.icon}
+                    </span>{" "}
+                    {platform}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
 
-      {/* Divider */}
       <div className="h-px w-full bg-neutral-800/70 mb-6"></div>
 
       {/* Bottom Section */}
       <div className="relative flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-500">
-        <div>
-          © {currentYear} <span className="text-white font-medium">Graphy</span>. All rights reserved.
-        </div>
+        <div>{language.Footer.copyright}</div>
 
         <div className="flex flex-wrap justify-center gap-6">
-          <a href="/privacy" className="hover:text-white transition-colors">
-            Privacy Policy
-          </a>
-          <a href="/terms" className="hover:text-white transition-colors">
-            Terms of Service
-          </a>
-          <a href="/cookies" className="hover:text-white transition-colors">
-            Cookies Settings
-          </a>
+          {language.Footer.legal_links.map((link, index) => (
+            <a
+              key={index}
+              href={`/${link.toLowerCase().replace(/\s+/g, "-")}`}
+              className="hover:text-white transition-colors"
+            >
+              {link}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

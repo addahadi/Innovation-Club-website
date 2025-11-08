@@ -6,5 +6,39 @@
   "Hierarchy": {
     "title": "Innovation Hierarchy",
     "content": "Our hierarchical structure promotes collaboration and innovation at every level. Each member plays an essential role in fulfilling our mission."
+  },
+  "Events_and_Members": {
+    "title": "Events & Members Over Time",
+    "content": "Track the growth of events and member count throughout the year"
+  },
+  "Our_Values": {
+    "title": "Our Values",
+    "content": "These core principles guide our actions, decisions, and the way we work together to achieve our mission.",
+    "values": [
+      {
+        "name": "Innovation",
+        "description": "We constantly push the field, thinking to push boundaries and explore new possibilities in technology."
+      },
+      {
+        "name": "Collaboration",
+        "description": "We believe in the power of teamwork, where diverse perspectives unite to create extraordinary solutions."
+      },
+      {
+        "name": "Excellence",
+        "description": "We are committed to the highest quality in everything we do, continuously learning and improving our craft."
+      },
+      {
+        "name": "Impact",
+        "description": "We focus on creating meaningful change that empowers individuals and communities through technology."
+      },
+      {
+        "name": "Passion",
+        "description": "We are driven by genuine enthusiasm for technology and its potential to transform the world for the better."
+      },
+      {
+        "name": "Integrity",
+        "description": "We maintain honesty, transparency, and ethical practices in all our projects and interactions."
+      }
+    ]
   }
 }
