@@ -35,15 +35,7 @@ import en from '../../../language/en/Home.json' assert { type: 'json' };
 
             {/* Hierarchy Section */}
             <section class="mb-24 sm:mb-32">
-                <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-                        {about.Hierarchy.title}
-                    </h2>
-                    <p class="text-base sm:text-lg lg:text-xl text-gray-400 mb-8 sm:mb-12">
-                        {about.Hierarchy.content}
-                    </p>
-                </div>
-                <Hierarchy language={about.Hierarchy} client:load />
+                <Hierarchy language={about.Hierarchy} client:only />
             </section>
 
             {/* Chart Section */}

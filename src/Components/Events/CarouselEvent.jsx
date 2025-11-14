@@ -1,5 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function CarouselEvent({ language }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +33,77 @@ export default function CarouselEvent({ language }) {
     },
   ];
 
+  useEffect(() => {
+    // Animate heading
+    gsap.fromTo(
+      headingRef.current,
+      { opacity: 0, y: -50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Animate description
+    gsap.fromTo(
+      descriptionRef.current,
+      { opacity: 0, y: -30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: descriptionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Animate carousel
+    gsap.fromTo(
+      carouselRef.current,
+      { opacity: 0, scale: 0.9 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        delay: 0.4,
+        scrollTrigger: {
+          trigger: carouselRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+          scrub : true,
+        },
+      }
+    );
+
+    // Animate indicators
+    gsap.fromTo(
+      indicatorsRef.current,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.6,
+        scrollTrigger: {
+          trigger: indicatorsRef.current,
+          start: "top 90%",
+          toggleActions: "play none none none",
+          scrub : true,
+        },
+      }
+    );
+  }, []);
+
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? items.length - 1 : prevIndex - 1
@@ -46,7 +121,7 @@ export default function CarouselEvent({ language }) {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-12 sm:py-16">
+    <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Header Section */}
       <div className="flex flex-col gap-2 mb-8 sm:mb-12">
         <h1
@@ -110,7 +185,6 @@ export default function CarouselEvent({ language }) {
               ))}
             </div>
 
-            {/* Navigation Buttons */}
             <button
               onClick={goToPrevious}
               className="absolute cursor-pointer z-20 left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 sm:p-3 rounded-full transition-all duration-200 hover:scale-110"

@@ -86,7 +86,7 @@ useEffect(() => {
   return (
     <div ref={sectionRef} className="w-full text-white py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12 sm:mb-16 text-center lg:text-left">
+        <div className="mb-12 sm:mb-16 lg:text-left">
           <h2 ref={headingRef} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
             {language.title}
           </h2>

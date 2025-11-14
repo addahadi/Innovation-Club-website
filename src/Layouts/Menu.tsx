@@ -8,7 +8,7 @@ function Menu({
   socialItems: { label: string; link: string }[];
 }) {
   return (
-    <div className=" fixed top-0 right-0  h-screen w-[300px] z-50 pointer-events-none">
+    <div className=" fixed top-0 right-0  h-screen w-[300px] max-md:w-full z-50 pointer-events-none">
       <StaggeredMenu
         position="right"
         items={menuItems as never}

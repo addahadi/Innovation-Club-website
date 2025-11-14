@@ -114,9 +114,9 @@ function About({ language }: AboutProps) {
 
   return (
     <div className="min-h-screen text-white">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 px-4 sm:px-6 lg:px-8">
         {/* Left Column */}
-        <div className="bg-neutral-950 p-6 sm:p-8 lg:p-12 rounded-2xl flex flex-col justify-center">
+        <div className="  rounded-2xl flex flex-col ">
           <h1
             ref={titleRef}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8"
@@ -144,11 +144,11 @@ function About({ language }: AboutProps) {
         </div>
 
         {/* Right Column */}
-        <div className="bg-neutral-950 p-6 sm:p-8 lg:p-12 rounded-2xl flex flex-col justify-between">
+        <div className=" rounded-2xl flex flex-col ">
           <div className="rounded-2xl overflow-hidden mb-6 sm:mb-8">
             <img
               ref={rightImageRef}
-              src="/about1.jpg"
+              src="/about2.jpg"
               alt="Innovation Team"
               className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
             />
@@ -164,7 +164,7 @@ function About({ language }: AboutProps) {
 
             <button
               ref={buttonRef}
-              className="w-full sm:w-auto border border-green-500 text-green-400 px-6 sm:px-8 py-3 rounded-lg hover:bg-green-700 hover:border-green-400 transition-all duration-300 text-base sm:text-lg"
+              className="w-full mt-auto sm:w-auto border border-green-500 text-green-400 px-6 sm:px-8 py-3 rounded-lg hover:bg-green-700 hover:border-green-400 transition-all duration-300 text-base sm:text-lg"
             >
               Learn More
             </button>
