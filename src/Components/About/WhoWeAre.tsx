@@ -50,7 +50,7 @@ export default function WhoWeAre({
 
       <p
         ref={textRef}
-        className="text-sm sm:text-lg lg:text-xl text-gray-400 leading-relaxed"
+        className="text-sm sm:text-lg lg:text-xl text-gray-400 leading-[50px]"
       >
         {language.content}
       </p>

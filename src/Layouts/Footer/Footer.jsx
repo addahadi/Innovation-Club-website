@@ -8,49 +8,49 @@ const Footer = ({ language }) => {
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-16 mb-12">
         <div className="flex flex-col gap-5">
           <h3 className="text-white font-semibold text-xl">
-            {language.Footer.location.title}
+            {language.location.title}
           </h3>
           <p className="text-neutral-400 leading-relaxed">
-            {language.Footer.location.address} <br />
-            {language.Footer.location.university}
+            {language.location.address} <br />
+            {language.location.university}
           </p>
         </div>
 
         <div>
           <h3 className="text-white font-semibold text-xl mb-4">
-            {language.Footer.contact.title}
+            {language.contact.title}
           </h3>
           <ul className="space-y-3">
             <li>
               <a
-                href={`tel:${language.Footer.contact.phone.replace(/\s/g, "")}`}
+                href={`tel:${language.contact.phone.replace(/\s/g, "")}`}
                 className="hover:text-white transition-colors flex items-center gap-2"
               >
                 <span role="img" aria-label="phone">
                   📞
                 </span>{" "}
-                {language.Footer.contact.phone}
+                {language.contact.phone}
               </a>
             </li>
             <li>
               <a
-                href={`mailto:${language.Footer.contact.email}`}
+                href={`mailto:${language.contact.email}`}
                 className="hover:text-white transition-colors flex items-center gap-2"
               >
                 <span role="img" aria-label="mail">
                   ✉️
                 </span>{" "}
-                {language.Footer.contact.email}
+                {language.contact.email}
               </a>
             </li>
           </ul>
         </div>
         <div>
           <h3 className="text-white font-semibold text-xl mb-4">
-            {language.Footer.navigation.title}
+            {language.navigation.title}
           </h3>
           <ul className="space-y-3">
-            {language.Footer.navigation.links.map((link, index) => (
+            {language.navigation.links.map((link, index) => (
               <li key={index}>
                 <a
                   href={index === 0 ? "/" : `/${link.toLowerCase()}`}
@@ -65,10 +65,10 @@ const Footer = ({ language }) => {
 
         <div>
           <h3 className="text-white font-semibold text-xl mb-4">
-            {language.Footer.socials.title}
+            {language.socials.title}
           </h3>
           <ul className="space-y-3">
-            {language.Footer.socials.platforms.map((platform, index) => {
+            {language.socials.platforms.map((platform, index) => {
               const platformData = {
                 Instagram: { icon: "📸", url: "https://instagram.com" },
                 TikTok: { icon: "🎵", url: "https://tiktok.com" },
@@ -101,10 +101,10 @@ const Footer = ({ language }) => {
 
       {/* Bottom Section */}
       <div className="relative flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-500">
-        <div>{language.Footer.copyright}</div>
+        <div>{language.copyright}</div>
 
         <div className="flex flex-wrap justify-center gap-6">
-          {language.Footer.legal_links.map((link, index) => (
+          {language.legal_links.map((link, index) => (
             <a
               key={index}
               href={`/${link.toLowerCase().replace(/\s+/g, "-")}`}

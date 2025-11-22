@@ -53,7 +53,6 @@ function About({ language }: AboutProps) {
         leftImageRef.current,
         {
           opacity: 0,
-          scale: 0.95,
           y: isMobile ? 20 : 30,
           duration: isMobile ? 0.6 : 1,
           ease: "power2.out",
@@ -76,7 +75,6 @@ function About({ language }: AboutProps) {
     rightTl
       .from(rightImageRef.current, {
         opacity: 0,
-        scale: 0.95,
         x: isMobile ? 0 : 50,
         y: isMobile ? 20 : 0,
         duration: isMobile ? 0.6 : 1,

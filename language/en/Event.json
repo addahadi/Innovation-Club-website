@@ -1,0 +1,11 @@
+{
+    "title" : "Club",
+    "subtitle" : "Events",
+    "description" : "Join us in our mission to inspire, educate, and connect the nextgeneration of innovators through workshops, hackathons, and tech talks.",
+    "states" : {
+        "1":"Events Organized",
+        "2":"Expert Speakers",
+        "3":"Projects Built",
+        "4":"Participants"
+    }
+}

@@ -1,0 +1,33 @@
+
+---
+import Navbar from '../../Layouts/Navbar.astro';
+import SeoHeader from '../../Layouts/SeoHeader.astro';
+import "../../styles/global.css";
+import en_navbar from '../../../language/en/Navbar.json' assert { type: 'json' };
+import FooterSection from '../../Layouts/Footer/FooterSection';
+import EventsGrid from '../../Components/Events/EventsGrid';
+import EventsHero from '../../Components/Events/EventsHero';
+import EventStats from '../../Components/Events/EventState';
+import en from '../../../language/en/Home.json' assert { type: 'json' };
+import en_event from '../../../language/en/Event.json' assert { type: 'json' };
+
+---
+
+<SeoHeader title="Our Events - Innovation Club">
+    <main class="min-h-screen bg-zinc-950">
+        <Navbar language={en_navbar} />
+        
+        <!-- Hero Section -->
+        <EventsHero language={en_event} client:load />
+        
+        <!-- Stats Section -->
+        <EventStats language={en_event.states} client:load />
+        
+        <!-- Events Grid -->
+        <section class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+            <EventsGrid client:load />
+        </section>
+        
+        <FooterSection language={en.Footer} client:load />
+    </main>
+</SeoHeader>
