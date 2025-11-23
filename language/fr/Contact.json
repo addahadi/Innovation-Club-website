@@ -1,0 +1,18 @@
+{
+  "title": "Contact",
+  "subtitle": "",
+  "description": "Have a question or want to work together? We'd love to hear from you.",
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message"
+  },
+  "placeholders": {
+    "name": "Entrez votre nom",
+    "email": "Entrez votre email",
+    "message": "Écrivez votre message ici..."
+  },
+    "button": {
+        "send": "Envoyer le message"
+    }
+}
