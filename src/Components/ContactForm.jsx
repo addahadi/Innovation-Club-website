@@ -87,7 +87,10 @@ export default function ContactForm({
       className=" px-4 sm:px-6 lg:px-8 pt-20 max-w-7xl mx-auto w-full"
     >
       <div className="mb-12">
-        <h1 ref={titleRef} className="text-7xl font-bold text-white mb-4">
+        <h1
+          ref={titleRef}
+          className="text-5xl md:text-7xl font-bold text-white mb-4"
+        >
           {language.title}{" "}
           <span className="text-green-600">{language.subtitle}</span>
         </h1>
