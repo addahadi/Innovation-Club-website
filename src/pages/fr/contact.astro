@@ -1,6 +1,5 @@
 
 ---
-import Navbar from '../../Layouts/Navbar.astro';
 import SeoHeader from '../../Layouts/SeoHeader.astro';
 import "../../styles/global.css";
 import fr_navbar from '../../../language/fr/Navbar.json' assert { type: 'json' };
@@ -8,10 +7,11 @@ import FooterSection from '../../Layouts/Footer/FooterSection';
 import fr from '../../../language/fr/Home.json' assert { type: 'json' };
 import fr_contact from '../../../language/fr/Contact.json' assert { type: 'json' };
 import ContactForm from '../../Components/ContactForm.jsx';
+import Header from '../../Layouts/Header.astro';
 
 <SeoHeader title="Our Events - Innovation Club">
     <main class="min-h-screen bg-zinc-950">
-        <Navbar language={fr_navbar} />
+        <Header language={fr_navbar} />
         
         <ContactForm language={fr_contact} client:load />
 

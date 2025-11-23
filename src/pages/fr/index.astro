@@ -3,18 +3,17 @@ import SeoHeader from '../../Layouts/SeoHeader.astro';
 import Hero from '../../Components/Landing/Hero';
 import fr from '../../../language/fr/Home.json' assert { type: 'json' };
 import fr_navbar from '../../../language/fr/Navbar.json' assert { type: 'json' };
-import Navbar from '../../Layouts/Navbar.astro';
 import About from '../../Components/Landing/About';
-import Chart from '../../Components/About/Chart.tsx';
 import FooterSection from '../../Layouts/Footer/FooterSection';
 import "../../styles/global.css";
 import Squares from '../../Components/Ui/Squares.jsx';
 import CarouselEvent from '../../Components/Events/CarouselEvent.jsx';
 import FAQ from '../../Components/Faq.tsx';
+import Header from '../../Layouts/Header.astro';
 ---
 
 <SeoHeader title="Innovation with Astro">
-    <Navbar language={fr_navbar} />
+    <Header language={fr_navbar} />
     <div class="absolute inset-0 min-h-screen w-full">
         <Squares
             speed={0.5}

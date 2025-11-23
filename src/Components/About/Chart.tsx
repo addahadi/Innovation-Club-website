@@ -127,7 +127,7 @@ const  Chart: React.FC<ChartProps> = ({ language }) => {
 
   return (
     <div className="w-full min-h-[80vh] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-10">
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         <h2
           ref={headingRef}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6"
@@ -141,7 +141,7 @@ const  Chart: React.FC<ChartProps> = ({ language }) => {
           {language.content}
         </p>
         <div ref={chartRef} className="w-full overflow-x-auto">
-          <div className=" w-[700px]">
+          <div className=" w-[700px] md:w-full">
             <ResponsiveContainer width="100%" height={500}>
               <LineChart
                 data={data}

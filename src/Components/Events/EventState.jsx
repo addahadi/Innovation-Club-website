@@ -24,21 +24,9 @@ const EventStats = ({
         stat,
         {
           opacity: 0,
-          y: 30,
-          scale: 0.9,
         },
         {
           opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: stat,
-            start: "top bottom-=100",
-            scrub:true,
-          },
-          delay: index * 0.1,
         }
       );
     });
@@ -56,7 +44,7 @@ const EventStats = ({
             <div
               key={index}
               ref={(el) => (statsRef.current[index] = el)}
-              className="text-center p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-green-500/50 transition-all duration-300"
+              className="text-center p-6 opacity-0 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-green-500/50 transition-all duration-300"
             >
               <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
                 {stat.number}

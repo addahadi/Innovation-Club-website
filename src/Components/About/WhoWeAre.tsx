@@ -40,7 +40,7 @@ export default function WhoWeAre({
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:py-16 lg:py-20">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:py-16 lg:py-20">
       <h1
         ref={headingRef}
         className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-8"
@@ -50,7 +50,7 @@ export default function WhoWeAre({
 
       <p
         ref={textRef}
-        className="text-sm sm:text-lg lg:text-xl text-gray-400 leading-[50px]"
+        className="text-sm sm:text-lg lg:text-xl text-gray-400 max-sm:leading-[40px] leading-[50px]"
       >
         {language.content}
       </p>

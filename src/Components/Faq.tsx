@@ -54,7 +54,7 @@ export default function FAQ({ language }: { language: any }) {
         {/* Heading */}
         <h2
           ref={headingRef}
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-8 sm:mb-12 text-center sm:text-left"
+          className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8 sm:mb-12"
         >
           {language.FAQ.title}
         </h2>

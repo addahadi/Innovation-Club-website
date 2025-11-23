@@ -20,6 +20,7 @@ function Menu({
         changeMenuColorOnOpen={true}
         colors={["#2cff29", "#2cff29"]}
         accentColor="#2cff29"
+        className=""
         onMenuOpen={() => console.log("Menu opened")}
         onMenuClose={() => console.log("Menu closed")}
       />

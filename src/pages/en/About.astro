@@ -2,7 +2,6 @@
 ---
 
 import WhoWeAre from '../../Components/About/WhoWeAre';
-import Navbar from '../../Layouts/Navbar.astro';
 import SeoHeader from '../../Layouts/SeoHeader.astro';
 import "../../styles/global.css";
 import about from '../../../language/en/About.json' assert { type: 'json' };
@@ -12,20 +11,15 @@ import Chart from '../../Components/About/Chart';
 import ValuesComponent from '../../Components/About/OurValues';
 import FooterSection from '../../Layouts/Footer/FooterSection';
 import en from '../../../language/en/Home.json' assert { type: 'json' };
+import Header from '../../Layouts/Header.astro';
 ---
 
 
----
-// ...existing imports...
----
 
----
-// ...existing imports...
----
 
 <SeoHeader title="À propos de nous - Innovation Club">
     <main class="min-h-screen bg-zinc-950">
-        <Navbar language={en_navbar} />
+        <Header language={en_navbar} />
         {/* Use flex column with consistent spacing */}
         <div class="flex flex-col">
             {/* Hero Section - WhoWeAre */}

@@ -99,7 +99,7 @@ export default function ContactForm({
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="bg-neutral-900 rounded-2xl p-6 shadow-2xl border border-neutral-800"
+        className="bg-neutral-900 py-10 rounded-2xl p-6 shadow-2xl border border-neutral-800"
       >
         <div className="mb-6">
           <label

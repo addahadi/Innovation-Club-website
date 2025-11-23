@@ -133,8 +133,8 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
       for (const key in relativePositions) {
         const id = Number(key);
         newPositions[id] = {
-          x: (relativePositions[id].x / 100) * width,
-          y: (relativePositions[id].y / 100) * height,
+          //@ts-ignore
+          x: (relativePositions[id].x / 100) * width,y: (relativePositions[id].y / 100) * height,
         };
       }
 
@@ -294,7 +294,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
   const glowIntensity = Math.min(0.2 + step * 0.1, 1);
 
   return (
-    <div className="max-w-6xl min-h-screen mx-auto">
+    <div className="max-w-7xl min-h-screen mx-auto">
       <div
         className="px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 mb-8 sm:mb-12"
         ref={headerRef}

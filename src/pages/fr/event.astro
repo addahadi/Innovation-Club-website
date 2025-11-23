@@ -1,6 +1,5 @@
 
 ---
-import Navbar from '../../Layouts/Navbar.astro';
 import SeoHeader from '../../Layouts/SeoHeader.astro';
 import "../../styles/global.css";
 import fr_navbar from '../../../language/fr/Navbar.json' assert { type: 'json' };
@@ -10,11 +9,12 @@ import EventsHero from '../../Components/Events/EventsHero';
 import EventStats from '../../Components/Events/EventState';
 import fr from '../../../language/fr/Home.json' assert { type: 'json' };
 import fr_event from '../../../language/fr/Event.json' assert { type: 'json' };
+import Header from '../../Layouts/Header.astro';
 ---
 
 <SeoHeader title="Our Events - Innovation Club">
     <main class="min-h-screen bg-zinc-950">
-        <Navbar language={fr_navbar} />
+        <Header language={fr_navbar} />
         
         <EventsHero 
          language={fr_event} client:load />

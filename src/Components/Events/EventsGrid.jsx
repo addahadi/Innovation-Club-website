@@ -88,6 +88,7 @@ const EventsGrid = () => {
         );
       });
     };
+    initAnimations();
 
  
     return () => {
