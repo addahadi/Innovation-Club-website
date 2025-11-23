@@ -14,7 +14,7 @@ const EventsGrid = () => {
       title: "Join us💚",
       date: "January 5, 2024",
       attendees: 140,
-      image: "../../../public/join_us.jpg",
+      image: "/join_us.jpg",
       description:
         "A welcoming highlight showcasing community spirit and new member engagement.",
       tags: ["Community", "Welcome", "Club"],
@@ -24,7 +24,7 @@ const EventsGrid = () => {
       title: "🩷pink october🩷",
       date: "October 10, 2024",
       attendees: 220,
-      image: "../../../public/octobre_rose.jpg",
+      image: "/octobre_rose.jpg",
       description:
         "Awareness campaign dedicated to breast cancer support and education.",
       tags: ["Health", "Awareness", "PinkOctober"],
@@ -34,7 +34,7 @@ const EventsGrid = () => {
       title: "synapse festival",
       date: "March 20, 2024",
       attendees: 210,
-      image: "../../../public/synpase.jpg",
+      image: "/synpase.jpg",
       description:
         "Ramadan nights, charity events, and spiritual gatherings with members.",
       tags: ["tiaret", "clubs", "collaboration"],
@@ -44,7 +44,7 @@ const EventsGrid = () => {
       title: "1O1✨4th edition",
       date: "February 14, 2024",
       attendees: 300,
-      image: "../../../public/nova.jpg",
+      image: "/nova.jpg",
       description:
         "The 4th edition of the popular 101 program featuring workshops and talks.",
       tags: ["Workshop", "Program", "Education"],
@@ -54,7 +54,7 @@ const EventsGrid = () => {
       title: "squid game",
       date: "September 12, 2024",
       attendees: 75,
-      image: "../../../public/squid_game.jpg",
+      image: "/squid_game.jpg",
       description:
         "First aid and emergency response learning session for members.",
       tags: ["who we are", "Gamg", "explanatory"],
