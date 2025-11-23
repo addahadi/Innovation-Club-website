@@ -6,7 +6,7 @@
     "links" : {
         "home" : "/fr",
         "about" : "/fr/about",
-        "events" : "/fr/events",
+        "events" : "/fr/event",
         "contact" : "/fr/contact"
     }
 }
