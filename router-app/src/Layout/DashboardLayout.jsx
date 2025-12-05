@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Menu, Home, BarChart, Settings, Users } from "lucide-react";
 
+import { Menu, Home, Boxes, Calendar } from "lucide-react";
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const location = useLocation();
 
   const navItems = [
-    { path: "/", icon: Home, label: "Dashboard" },
-    { path: "/analytics", icon: BarChart, label: "Analytics" },
-    { path: "/users", icon: Users, label: "Users" },
-    { path: "/settings", icon: Settings, label: "Settings" },
+    { path: "/", icon: Home, label: "Home" },
+    { path: "/landing", icon: Home, label: "Landing" },
+    { path: "/about", icon: Boxes, label: "About" },
+    { path: "/events", icon: Calendar, label: "Events" },
   ];
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="min-h-screen bg-neutral-900">
+    <div className="min-h-screen bg-gray-900">
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 bg-neutral-900 border-r border-neutral-800 transition-all duration-300 z-40 ${
+        className={`fixed top-0 left-0 bottom-0 bg-gray-900 border-r border-gray-800 transition-all duration-300 z-40 ${
           isSidebarOpen ? "w-64" : "w-16"
         }`}
       >
-        <div className="h-16 flex items-center px-4 border-b border-neutral-800">
+        <div className="h-16 flex items-center px-4 border-b border-gray-800">
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="text-neutral-400 hover:text-white transition-colors"
@@ -79,7 +79,7 @@ const DashboardLayout = () => {
         </header>
 
         {/* Content Area */}
-        <main className="p-6 bg-neutral-900 min-h-[calc(100vh-4rem)]">
+        <main className="p-6 bg-gray-900 min-h-[calc(100vh-4rem)]">
           <Outlet />
         </main>
       </div>
