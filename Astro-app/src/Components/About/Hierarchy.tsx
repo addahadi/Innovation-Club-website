@@ -160,6 +160,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
         newPositions[id] = {
           //@ts-ignore
           x: (relativePositions[id].x / 100) * width,
+          //@ts-ignore
           y: (relativePositions[id].y / 100) * height,
         };
       }

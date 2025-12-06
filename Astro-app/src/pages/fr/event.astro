@@ -24,7 +24,9 @@ import Header from '../../Layouts/Header.astro';
         <section class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
            
             
-            <EventsGrid client:load />
+            <EventsGrid language={{
+                type : "fr",
+            }} client:load />
         </section>
         
         <FooterSection language={fr.Footer} client:load />
