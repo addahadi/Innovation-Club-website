@@ -1,68 +1,107 @@
 import { useState, useEffect, useRef } from "react";
-
-import {gsap} from "gsap";
-
+import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import db from "../../../db/firebase";
 
 gsap.registerPlugin(ScrollTrigger);
-const EventsGrid = () => {
+
+// --- Skeleton Component ---
+const EventSkeleton = () => (
+  <div className="w-full py-12">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
+      {[...Array(6)].map((_, i) => (
+        <div
+          key={i}
+          className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 h-[450px]"
+        >
+          {/* Image Skeleton */}
+          <div className="h-48 bg-zinc-800"></div>
+
+          {/* Content Skeleton */}
+          <div className="p-6">
+            <div className="h-4 bg-zinc-700 w-1/3 mb-4 rounded"></div>
+            <div className="h-6 bg-zinc-700 w-full mb-3 rounded"></div>
+            <div className="h-4 bg-zinc-700 w-5/6 mb-4 rounded"></div>
+            <div className="h-4 bg-zinc-700 w-2/3 mb-6 rounded"></div>
+
+            {/* Tags Skeleton */}
+            <div className="flex gap-2 mb-4">
+              <div className="h-6 bg-zinc-800 w-12 rounded-md"></div>
+              <div className="h-6 bg-zinc-800 w-16 rounded-md"></div>
+            </div>
+
+            {/* Footer Skeleton */}
+            <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+              <div className="h-4 bg-zinc-700 w-1/3 rounded"></div>
+              <div className="h-4 bg-green-500/30 w-1/4 rounded"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const EventsGrid = ({ language }) => {
   const cardsRef = useRef([]);
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const events = [
-    {
-      id: 1,
-      title: "Join us💚",
-      date: "January 5, 2024",
-      attendees: 140,
-      image: "/join_us.jpg",
-      description:
-        "A welcoming highlight showcasing community spirit and new member engagement.",
-      tags: ["Community", "Welcome", "Club"],
-    },
-    {
-      id: 2,
-      title: "🩷pink october🩷",
-      date: "October 10, 2024",
-      attendees: 220,
-      image: "/octobre_rose.jpg",
-      description:
-        "Awareness campaign dedicated to breast cancer support and education.",
-      tags: ["Health", "Awareness", "PinkOctober"],
-    },
-    {
-      id: 5,
-      title: "synapse festival",
-      date: "March 20, 2024",
-      attendees: 210,
-      image: "/synpase.jpg",
-      description:
-        "Ramadan nights, charity events, and spiritual gatherings with members.",
-      tags: ["tiaret", "clubs", "collaboration"],
-    },
-    {
-      id: 6,
-      title: "1O1✨4th edition",
-      date: "February 14, 2024",
-      attendees: 300,
-      image: "/nova.jpg",
-      description:
-        "The 4th edition of the popular 101 program featuring workshops and talks.",
-      tags: ["Workshop", "Program", "Education"],
-    },
-    {
-      id: 9,
-      title: "squid game",
-      date: "September 12, 2024",
-      attendees: 75,
-      image: "/squid_game.jpg",
-      description:
-        "First aid and emergency response learning session for members.",
-      tags: ["who we are", "Gamg", "explanatory"],
-    },
-  ];
+  // Helper to format date
+  const formatDate = (dateValue) => {
+    if (dateValue?.toDate) {
+      return dateValue
+        .toDate()
+        .toLocaleDateString(language.type === "fr" ? "fr-FR" : "en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+    }
+    return dateValue ? String(dateValue) : "Date N/A";
+  };
 
- 
   useEffect(() => {
+    fetchEventsData();
+  }, []);
+
+  async function fetchEventsData() {
+    setIsLoading(true);
+    try {
+      const eventsColRef = collection(db, "events");
+      const eventSnapshot = await getDocs(eventsColRef);
+
+      const fetchedEvents = eventSnapshot.docs.map((doc) => {
+        const data = doc.data();
+        const lang = language.type;
+
+        return {
+          id: doc.id,
+          title: data.title?.[lang] || data.title?.en || "No Title",
+          description:
+            data.description?.[lang] ||
+            data.description?.en ||
+            "No description provided.",
+          tags: data.tags?.[lang] || data.tags?.en || [],
+          image: data.heroImage || "/default_event.jpg",
+          date: formatDate(data.startDate),
+          attendees: data.attendees || 0,
+        };
+      });
+
+      setEvents(fetchedEvents);
+    } catch (error) {
+      console.error("Error fetching events data:", error);
+      setEvents([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+
+
     const initAnimations = () => {
       cardsRef.current.forEach((card, index) => {
         if (!card) return;
@@ -88,24 +127,39 @@ const EventsGrid = () => {
         );
       });
     };
+
+    // Ensure cardsRef.current is cleaned up before assignment
+    cardsRef.current = cardsRef.current.slice(0, events.length);
     initAnimations();
 
- 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
+  }, [isLoading, events.length]);
 
-  }, []);
+  if (isLoading) {
+    return <EventSkeleton />;
+  }
+
+  if (events.length === 0) {
+    return (
+      <div className="w-full text-center py-20 text-xl text-red-400">
+        No events found in the database.
+      </div>
+    );
+  }
 
   return (
-    <div>
+    <div className="py-12">
       {/* Events Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {events.map((event, index) => (
           <div
             key={event.id}
-            ref={(el) => (cardsRef.current[index] = el)}
-            className="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-green-500/50 transition-all duration-300 hover:scale-105"
+            ref={(el) => {
+              if (el) cardsRef.current[index] = el;
+            }}
+            className="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-green-500/50 transition-all duration-300 hover:scale-[1.02]"
           >
             {/* Event Image */}
             <div className="relative h-48 overflow-hidden">
@@ -196,19 +250,6 @@ const EventsGrid = () => {
           </div>
         ))}
       </div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };

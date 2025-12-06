@@ -68,7 +68,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
   };
 
   return (
-    <div className=" rounded-lg p-6 mb-6 border border-gray-600">
+    <div className=" bg-gray-800 rounded-lg p-6 mb-6 border border-gray-600">
       <h3 className="text-xl font-semibold text-gray-100 mb-4">
         New Department
       </h3>
@@ -84,7 +84,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
               en: { ...prev.en, name: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400"
+          className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400"
         />
         <Input
           placeholder="Nom (FR)"
@@ -95,7 +95,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
               fr: { ...prev.fr, name: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400"
+          className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400"
         />
       </div>
 
@@ -110,7 +110,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
               en: { ...prev.en, description: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[96px]"
+          className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[96px]"
         />
         <Textarea
           placeholder="Description (FR)"
@@ -121,7 +121,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
               fr: { ...prev.fr, description: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[96px]"
+          className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[96px]"
         />
       </div>
 
@@ -140,7 +140,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
                 },
               }))
             }
-            className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400"
+            className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400"
           />
           <Input
             placeholder="Nom du Lead (FR)"
@@ -154,7 +154,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
                 },
               }))
             }
-            className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400"
+            className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400"
           />
         </div>
 
@@ -188,7 +188,7 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
           accept="image/*"
           onChange={handleFileChange}
           disabled={uploading}
-          className="bg-gray-800 text-gray-100 border-gray-600"
+          className="bg-gray-900 text-gray-100 border-gray-600"
         />
         {uploading && (
           <p className="text-sm text-blue-400 mt-2">
@@ -205,7 +205,9 @@ function AddDepartmentForm({ onAdd, onCancel, onMessage }) {
         >
           <Save size={18} className="mr-2" /> Add
         </Button>
-        <Button onClick={onCancel} variant="outline">
+        <Button onClick={onCancel} 
+        
+        >
           <X size={18} className="mr-2" /> Cancel
         </Button>
       </div>
@@ -219,7 +221,7 @@ function DepartmentCard({ department, onEdit, onDelete, lang }) {
   if (!department[lang]) return null;
 
   return (
-    <div className=" rounded-2xl p-5 border border-gray-600 mt-6">
+    <div className=" bg-gray-800 rounded-2xl p-5 border border-gray-600 mt-6">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className="text-xl font-semibold text-gray-100">
@@ -307,7 +309,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
   };
 
   return (
-    <div className=" rounded-lg p-6 border border-gray-600 mt-6">
+    <div className=" bg-gray-800 rounded-lg p-6 border border-gray-600 mt-6">
       <h3 className="text-xl font-semibold text-gray-100 mb-4">
         Edit Department
       </h3>
@@ -323,7 +325,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
               en: { ...p.en, name: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600"
+          className="bg-gray-900 text-gray-100 border-gray-600"
         />
         <Input
           value={formData.fr.name}
@@ -333,7 +335,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
               fr: { ...p.fr, name: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600"
+          className="bg-gray-900 text-gray-100 border-gray-600"
         />
       </div>
 
@@ -347,7 +349,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
               en: { ...p.en, description: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600 min-h-[96px]"
+          className="bg-gray-900 text-gray-100 border-gray-600 min-h-[96px]"
         />
         <Textarea
           value={formData.fr.description}
@@ -357,7 +359,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
               fr: { ...p.fr, description: e.target.value },
             }))
           }
-          className="bg-gray-800 text-gray-100 border-gray-600 min-h-[96px]"
+          className="bg-gray-900 text-gray-100 border-gray-600 min-h-[96px]"
         />
       </div>
 
@@ -372,7 +374,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
                 en: { ...p.en, lead: { ...p.en.lead, name: e.target.value } },
               }))
             }
-            className="bg-gray-800 text-gray-100 border-gray-600"
+            className="bg-gray-900 text-gray-100 border-gray-600"
           />
           <Input
             value={formData.fr.lead.name}
@@ -382,7 +384,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
                 fr: { ...p.fr, lead: { ...p.fr.lead, name: e.target.value } },
               }))
             }
-            className="bg-gray-800 text-gray-100 border-gray-600"
+            className="bg-gray-900 text-gray-100 border-gray-600"
           />
         </div>
 
@@ -416,7 +418,7 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
           accept="image/*"
           onChange={handleFileChange}
           disabled={uploading}
-          className="bg-gray-800 text-gray-100 border-gray-600"
+          className="bg-gray-900 text-gray-100 border-gray-600"
         />
         {uploading && (
           <p className="text-sm text-blue-400 mt-2">Uploading...</p>
@@ -431,7 +433,8 @@ function DepartmentEditForm({ department, onSave, onCancel, onMessage }) {
         >
           <Save size={18} className="mr-2" /> Save
         </Button>
-        <Button onClick={onCancel} variant="outline">
+        <Button onClick={onCancel} 
+        >
           <X size={18} className="mr-2" /> Cancel
         </Button>
       </div>
@@ -531,7 +534,7 @@ function Hierarchy() {
   };
 
   return (
-    <div className="bg-gray-800 rounded-2xl mt-10 p-6 border border-gray-700">
+    <div className=" mt-10 p-6 ">
       {message && (
         <div
           className={`mb-6 p-4 rounded-lg ${
@@ -545,7 +548,7 @@ function Hierarchy() {
       )}
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-gray-100">
+        <h2 className="text-2xl font-semibold tracking-tight text-gray-100">
           Club Hierarchy / Departments
         </h2>
 

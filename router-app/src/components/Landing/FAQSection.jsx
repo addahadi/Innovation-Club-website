@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../db/firebase";
 import { collection, getDocs, deleteDoc } from "firebase/firestore";
+import LanguageToggle from "../LanguageToggle";
 
 const FAQSection = () => {
   const [faqs, setFaqs] = useState([]);
@@ -15,6 +16,7 @@ const FAQSection = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+  const [previewLang, setPreviewLang] = useState("en");
 
   // Fetch FAQs from Firestore on component mount
   useEffect(() => {
@@ -117,9 +119,7 @@ const FAQSection = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 p-8">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-white mb-8">FAQ Management</h1>
-
+      <div>
         {message && (
           <div
             className={`mb-6 p-4 rounded-lg ${
@@ -132,19 +132,25 @@ const FAQSection = () => {
           </div>
         )}
 
-        <div className="bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-700">
+        <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-semibold tracking-tight  text-white">
               Frequently Asked Questions
             </h2>
-            <Button
-              onClick={addFaq}
-              className="bg-green-600 hover:bg-green-700"
-              disabled={saving}
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add FAQ
-            </Button>
+            <div className="flex items-center gap-3">
+              <LanguageToggle
+                previewLang={previewLang}
+                setPreviewLang={setPreviewLang}
+              />
+              <Button
+                onClick={addFaq}
+                className="bg-green-600 hover:bg-green-700"
+                disabled={saving}
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add FAQ
+              </Button>
+            </div>
           </div>
 
           {faqs.length === 0 ? (
@@ -159,71 +165,83 @@ const FAQSection = () => {
               {faqs.map((faq) => (
                 <div
                   key={faq.id}
-                  className="border border-gray-700 rounded-lg p-4"
+                  className=" bg-gray-800 border border-gray-700 rounded-lg p-4"
                 >
                   {editingFaq === faq.id ? (
-                    <div className="space-y-4">
+                    <div className="">
                       {/* English */}
-                      <div className="bg-gray-750 p-4 rounded-lg">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Languages className="w-5 h-5 text-blue-400" />
-                          <h4 className="font-semibold text-white">English</h4>
-                        </div>
-                        <div className="space-y-3">
-                          <Input
-                            type="text"
-                            value={faq.en.question}
-                            onChange={(e) =>
-                              updateFaq(
-                                faq.id,
-                                "en",
-                                "question",
-                                e.target.value
-                              )
-                            }
-                            placeholder="Question"
-                            className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                          />
-                          <Textarea
-                            value={faq.en.answer}
-                            onChange={(e) =>
-                              updateFaq(faq.id, "en", "answer", e.target.value)
-                            }
-                            placeholder="Answer"
-                            className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                          />
+                      <div className="bg-gray-800 p-4 rounded-lg">
+                        <div className="mb-3">
+                          <label className="block text-sm font-medium text-gray-300 mb-1">
+                            Question
+                          </label>
+                          <div className=" flex flex-row gap-3">
+                            <Input
+                              type="text"
+                              value={faq.en.question}
+                              onChange={(e) =>
+                                updateFaq(
+                                  faq.id,
+                                  "en",
+                                  "question",
+                                  e.target.value
+                                )
+                              }
+                              placeholder="Question"
+                              className="bg-gray-900 border-gray-600 text-white placeholder-gray-400"
+                            />
+                            <Input
+                              type="text"
+                              value={faq.fr.question}
+                              onChange={(e) =>
+                                updateFaq(
+                                  faq.id,
+                                  "fr",
+                                  "question",
+                                  e.target.value
+                                )
+                              }
+                              placeholder="Question"
+                              className="bg-gray-900 border-gray-600 text-white placeholder-gray-400"
+                            />
+                          </div>
                         </div>
                       </div>
 
                       {/* French */}
-                      <div className="bg-gray-750 p-4 rounded-lg">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Languages className="w-5 h-5 text-blue-400" />
-                          <h4 className="font-semibold text-white">French</h4>
-                        </div>
-                        <div className="space-y-3">
-                          <Input
-                            type="text"
-                            value={faq.fr.question}
-                            onChange={(e) =>
-                              updateFaq(
-                                faq.id,
-                                "fr",
-                                "question",
-                                e.target.value
-                              )
-                            }
-                            placeholder="Question"
-                            className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                          />
-                          <Textarea
-                            value={faq.fr.answer}
-                            onChange={(e) =>
-                              updateFaq(faq.id, "fr", "answer", e.target.value)
-                            }
-                            placeholder="Réponse"
-                            className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                          />
+                      <div className="bg-gray-750 px-4 pb-4 rounded-lg">
+                        <div className="mb-3">
+                          <label className="block text-sm font-medium text-gray-300 mb-1">
+                            Answer
+                          </label>
+                          <div className=" flex flex-row gap-3">
+                            <Textarea
+                              value={faq.en.answer}
+                              onChange={(e) =>
+                                updateFaq(
+                                  faq.id,
+                                  "en",
+                                  "answer",
+                                  e.target.value
+                                )
+                              }
+                              placeholder="Answer"
+                              className="bg-gray-900 border-gray-600 text-white placeholder-gray-400"
+                            />
+                            <Textarea
+                              value={faq.fr.answer}
+                              onChange={(e) =>
+                                updateFaq(
+                                  faq.id,
+                                  "fr",
+                                  "answer",
+                                  e.target.value
+                                )
+                              }
+                              placeholder="Réponse"
+                              className="bg-gray-900 border-gray-600 text-white placeholder-gray-400"
+                            />
+                          </div>
                         </div>
                       </div>
 
@@ -251,28 +269,31 @@ const FAQSection = () => {
                     <div>
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <div className="mb-3">
-                            <span className="text-xs text-gray-400 uppercase">
-                              English
-                            </span>
-                            <h3 className="font-semibold text-white">
-                              {faq.en.question || "(No question)"}
-                            </h3>
-                            <p className="text-gray-400 text-sm mt-1">
-                              {faq.en.answer || "(No answer)"}
-                            </p>
-                          </div>
-                          <div>
-                            <span className="text-xs text-gray-400 uppercase">
-                              French
-                            </span>
-                            <h3 className="font-semibold text-white">
-                              {faq.fr.question || "(Pas de question)"}
-                            </h3>
-                            <p className="text-gray-400 text-sm mt-1">
-                              {faq.fr.answer || "(Pas de réponse)"}
-                            </p>
-                          </div>
+                          {previewLang === "fr" ? (
+                            <div>
+                              <span className="text-sm text-gray-400 uppercas mb-8">
+                                French
+                              </span>
+                              <h3 className="font-semibold text-white">
+                                {faq.fr.question || "(Pas de question)"}
+                              </h3>
+                              <p className="text-gray-400 text-sm mt-1">
+                                {faq.fr.answer || "(Pas de réponse)"}
+                              </p>
+                            </div>
+                          ) : (
+                            <div>
+                              <span className="text-sm text-gray-400 uppercase mb-8">
+                                English
+                              </span>
+                              <h3 className="font-semibold text-white">
+                                {faq.en.question || "(no question)"}
+                              </h3>
+                              <p className="text-gray-400 text-sm mt-1">
+                                {faq.en.answer || "(no answer)"}
+                              </p>
+                            </div>
+                          )}
                         </div>
                         <div className="flex gap-2 ml-4">
                           <Button

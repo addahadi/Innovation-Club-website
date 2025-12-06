@@ -30,9 +30,9 @@ const HeroSection = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    console.log(heroData)
+    console.log(heroData);
     fetchHeroData();
-    console.log(heroData)
+    console.log(heroData);
   }, []);
 
   const fetchHeroData = async () => {
@@ -44,13 +44,10 @@ const HeroSection = () => {
       if (docSnap.exists()) {
         setHeroData(docSnap.data());
       }
-  
-    } 
-    catch (error) {
+    } catch (error) {
       console.error("Error fetching data:", error);
       setMessage("Error loading data: " + error.message);
-    } 
-    finally {
+    } finally {
       setLoading(false);
       setTimeout(() => setMessage(""), 3000);
     }
@@ -110,102 +107,83 @@ const HeroSection = () => {
         )}
 
         <div className="space-y-6">
-          {/* English Version */}
+          {/* Combined Language Section */}
           <div className="bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-700">
-            <div className="flex items-center gap-2 mb-6">
-              <Languages className="w-6 h-6 text-green-400" />
-              <h2 className="text-2xl font-bold text-white">
-                Hero Section - English
-              </h2>
-            </div>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Title
                 </label>
-                <Input
-                  type="text"
-                  value={heroData.en.title}
-                  onChange={(e) =>
-                    handleHeroChange("en", "title", e.target.value)
-                  }
-                  className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                />
+                <div className="flex gap-4">
+                  <Input
+                    type="text"
+                    value={heroData.en.title}
+                    onChange={(e) =>
+                      handleHeroChange("en", "title", e.target.value)
+                    }
+                    placeholder="Enter English title here..."
+                    className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 flex-1"
+                  />
+                  <Input
+                    type="text"
+                    value={heroData.fr.title}
+                    onChange={(e) =>
+                      handleHeroChange("fr", "title", e.target.value)
+                    }
+                    placeholder="Entrez le titre français ici..."
+                    className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 flex-1"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Description
-                </label>
-                <Textarea
-                  value={heroData.en.description}
-                  onChange={(e) =>
-                    handleHeroChange("en", "description", e.target.value)
-                  }
-                  className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Button Text
-                </label>
-                <Input
-                  type="text"
-                  value={heroData.en.buttonText}
-                  onChange={(e) =>
-                    handleHeroChange("en", "buttonText", e.target.value)
-                  }
-                  className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                />
-              </div>
-            </div>
-          </div>
 
-          {/* French Version */}
-          <div className="bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-700">
-            <div className="flex items-center gap-2 mb-6">
-              <Languages className="w-6 h-6 text-green-400" />
-              <h2 className="text-2xl font-bold text-white">
-                Hero Section - French
-              </h2>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Title
-                </label>
-                <Input
-                  type="text"
-                  value={heroData.fr.title}
-                  onChange={(e) =>
-                    handleHeroChange("fr", "title", e.target.value)
-                  }
-                  className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                />
-              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Description
                 </label>
-                <Textarea
-                  value={heroData.fr.description}
-                  onChange={(e) =>
-                    handleHeroChange("fr", "description", e.target.value)
-                  }
-                  className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                />
+                <div className="flex gap-4">
+                  <Textarea
+                    value={heroData.en.description}
+                    onChange={(e) =>
+                      handleHeroChange("en", "description", e.target.value)
+                    }
+                    placeholder="Enter English description here..."
+                    className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 min-h-[120px] flex-1"
+                  />
+                  <Textarea
+                    value={heroData.fr.description}
+                    onChange={(e) =>
+                      handleHeroChange("fr", "description", e.target.value)
+                    }
+                    placeholder="Entrez la description française ici..."
+                    className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 min-h-[120px] flex-1"
+                  />
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Button Text
                 </label>
-                <Input
-                  type="text"
-                  value={heroData.fr.buttonText}
-                  onChange={(e) =>
-                    handleHeroChange("fr", "buttonText", e.target.value)
-                  }
-                  className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
-                />
+                <div className="flex gap-4">
+                  <Input
+                    type="text"
+                    value={heroData.en.buttonText}
+                    onChange={(e) =>
+                      handleHeroChange("en", "buttonText", e.target.value)
+                    }
+                    placeholder="Enter English button text here..."
+                    className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 flex-1"
+                  />
+                  <Input
+                    type="text"
+                    value={heroData.fr.buttonText}
+                    onChange={(e) =>
+                      handleHeroChange("fr", "buttonText", e.target.value)
+                    }
+                    placeholder="Entrez le texte du bouton français ici..."
+                    className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 flex-1"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -222,7 +200,7 @@ const HeroSection = () => {
                 handleHeroChange(null, "buttonUrl", e.target.value)
               }
               placeholder="Enter button URL"
-              className="bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+              className="bg-gray-900 border-gray-600 text-white placeholder-gray-400"
             />
           </div>
 

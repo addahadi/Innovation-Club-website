@@ -7,7 +7,6 @@ const DashboardLayout = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", icon: Home, label: "Home" },
     { path: "/landing", icon: Home, label: "Landing" },
     { path: "/about", icon: Boxes, label: "About" },
     { path: "/events", icon: Calendar, label: "Events" },
@@ -70,10 +69,10 @@ const DashboardLayout = () => {
         }`}
       >
         {/* Top Navbar */}
-        <header className="h-16 bg-green-700 flex items-center justify-end px-6 border-b border-green-600">
+        <header className="h-16 backdrop-blur-lg bg-green-700/40 flex items-center justify-end px-6 border-b border-green-600/30">
           <div className="flex items-center gap-3">
             <span className="text-white text-sm font-light">Admin</span>
-            <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-medium">
+            <div className="w-8 h-8 bg-green-600/80 rounded-full flex items-center justify-center text-white text-xs font-medium">
               A
             </div>
           </div>

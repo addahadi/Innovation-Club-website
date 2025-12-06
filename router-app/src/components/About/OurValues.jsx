@@ -6,9 +6,13 @@ import { Button } from "@/components/ui/button";
 
 // FIREBASE IMPORTS
 import { db } from "../../../db/firebase";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
-function AddValueForm({ onAdd, onCancel, onMessage }) {
+// LANGUAGE TOGGLE
+import LanguageToggle from "@/components/LanguageToggle";
+
+// ------------------------- AddValueForm -------------------------
+function AddValueForm({ onAdd, onCancel, onMessage, lang }) {
   const [formData, setFormData] = useState({
     en: { title: "", description: "" },
     fr: { title: "", description: "" },
@@ -28,143 +32,117 @@ function AddValueForm({ onAdd, onCancel, onMessage }) {
   };
 
   return (
-    <div className="bg-gray-700 rounded-lg p-6 mb-6 border border-gray-600">
+    <div className="bg-gray-800 rounded-lg p-6 mb-6 border border-gray-600">
       <h3 className="text-xl font-semibold text-gray-100 mb-4">
         Add New Value
       </h3>
-      <div className="space-y-6">
-        {/* English Section */}
-        <div className="bg-gray-800 p-4 rounded-lg border border-gray-600">
-          <h4 className="text-lg font-semibold text-blue-400 mb-3">English</h4>
-          <div className="space-y-3">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Value Title *
-              </label>
-              <Input
-                type="text"
-                value={formData.en.title}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    en: { ...formData.en, title: e.target.value },
-                  })
-                }
-                className="bg-gray-700 text-gray-100 border-gray-600"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Description *
-              </label>
-              <Textarea
-                value={formData.en.description}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    en: { ...formData.en, description: e.target.value },
-                  })
-                }
-                className="bg-gray-700 text-gray-100 border-gray-600 min-h-[80px]"
-              />
-            </div>
-          </div>
-        </div>
 
-        {/* French Section */}
-        <div className="bg-gray-800 p-4 rounded-lg border border-gray-600">
-          <h4 className="text-lg font-semibold text-green-400 mb-3">French</h4>
-          <div className="space-y-3">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Value Title *
-              </label>
-              <Input
-                type="text"
-                value={formData.fr.title}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    fr: { ...formData.fr, title: e.target.value },
-                  })
-                }
-                className="bg-gray-700 text-gray-100 border-gray-600"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Description *
-              </label>
-              <Textarea
-                value={formData.fr.description}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    fr: { ...formData.fr, description: e.target.value },
-                  })
-                }
-                className="bg-gray-700 text-gray-100 border-gray-600 min-h-[80px]"
-              />
-            </div>
-          </div>
+      {/* Show only selected language */}
+      <div className=" p-4 rounded-lg mt-10">
+        <label className=" text-gray-300">Title</label>
+        <div className=" flex flex-row gap-3">
+          <Input
+            placeholder="Title (En)"
+            value={formData.en.title}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                en: { ...formData.en, title: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600"
+          />
+          <Input
+            placeholder="Titre (Fr)"
+            value={formData.fr.title}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                fr: { ...formData.fr, title: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600 "
+          />
         </div>
+      </div>
+      <div className=" p-4 rounded-lg  mb-6 ">
+        <label className=" text-gray-300">Description</label>
+        <div className=" flex flex-row gap-3">
+          <Textarea
+            placeholder="Description (En)"
+            value={formData.en.description}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                en: { ...formData.en, description: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600 min-h-[80px]"
+          />
+          <Textarea
+            placeholder="Description (Fr)"
+            value={formData.fr.description}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                fr: { ...formData.fr, description: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600 min-h-[80px]"
+          />
+        </div>
+      </div>
 
-        <div className="flex gap-3 pt-4">
-          <Button
-            onClick={handleSubmit}
-            className="bg-green-700 hover:bg-green-600"
-          >
-            <Save size={18} className="mr-2" /> Add Value
-          </Button>
-          <Button
-            onClick={onCancel}
-            variant="outline"
-            className="border-gray-600 text-gray-300 hover:bg-gray-600"
-          >
-            <X size={18} className="mr-2" /> Cancel
-          </Button>
-        </div>
+      <div className="flex gap-3 pt-4">
+        <Button
+          onClick={handleSubmit}
+          className="bg-green-700 hover:bg-green-600"
+        >
+          <Save size={18} className="mr-2" /> Add Value
+        </Button>
+        <Button
+          onClick={onCancel}
+          variant="outline"
+        >
+          <X size={18} className="mr-2" /> Cancel
+        </Button>
       </div>
     </div>
   );
 }
 
-function ValueCard({ value, onEdit, onDelete }) {
+// ------------------------- ValueCard -------------------------
+function ValueCard({ value, lang, onEdit, onDelete }) {
   return (
-    <div className=" rounded-lg p-5 border border-gray-600">
+    <div className="bg-gray-800 rounded-lg p-5 border border-gray-600">
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
-          <div className="mb-4">
-            <p className="text-xs text-gray-400 uppercase mb-1">English</p>
-            <h3 className="text-lg font-semibold text-gray-100 mb-2">
-              {value.en.title}
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              {value.en.description}
-            </p>
-          </div>
-          <div>
-            <p className="text-xs text-gray-400 uppercase mb-1">French</p>
-            <h3 className="text-lg font-semibold text-gray-100 mb-2">
-              {value.fr.title}
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              {value.fr.description}
-            </p>
-          </div>
+          <p className="text-xs text-gray-400 uppercase mb-1">
+            {lang === "en" ? "English" : "French"}
+          </p>
+
+          <h3 className="text-lg font-semibold text-gray-100 mb-2">
+            {value[lang].title}
+          </h3>
+
+          <p className="text-gray-400 text-sm leading-relaxed">
+            {value[lang].description}
+          </p>
         </div>
+
         <div className="flex gap-2 ml-4 flex-shrink-0">
           <Button
             onClick={() => onEdit(value)}
             size="sm"
-            className="bg-transparent  hover:bg-gray-700 text-green-400 hover:text-green-300 transition-colors p-2"
+            className="bg-transparent hover:bg-gray-700 text-green-400 hover:text-green-300 p-2"
           >
             <Edit2 size={18} />
           </Button>
+
           <Button
             onClick={() => onDelete(value.id)}
             size="sm"
-            className="bg-transparent  hover:bg-gray-700 text-red-400 hover:text-red-300 transition-colors p-2"
+            className="bg-transparent hover:bg-gray-700 text-red-400 hover:text-red-300 p-2"
           >
             <Trash2 size={18} />
           </Button>
@@ -174,7 +152,8 @@ function ValueCard({ value, onEdit, onDelete }) {
   );
 }
 
-function ValueEditForm({ value, onSave, onCancel, onMessage }) {
+// ------------------------- ValueEditForm -------------------------
+function ValueEditForm({ value, onSave, onCancel, onMessage, lang }) {
   const [formData, setFormData] = useState({ ...value });
 
   const handleSubmit = () => {
@@ -191,99 +170,100 @@ function ValueEditForm({ value, onSave, onCancel, onMessage }) {
   };
 
   return (
-    <div className="bg-gray-700 rounded-lg p-6 border border-gray-600">
+    <div className="bg-gray-800 rounded-lg p-6 border border-gray-600">
       <h3 className="text-xl font-semibold text-gray-100 mb-4">Edit Value</h3>
-      {/* Same fields as AddForm, just using formData state initialized with value */}
-      <div className="space-y-6">
-        <div className="bg-gray-800 p-4 rounded-lg border border-gray-600">
-          <h4 className="text-lg font-semibold text-blue-400 mb-3">English</h4>
-          <div className="space-y-3">
-            <Input
-              value={formData.en.title}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  en: { ...formData.en, title: e.target.value },
-                })
-              }
-              className="bg-gray-700 text-gray-100 border-gray-600"
-            />
-            <Textarea
-              value={formData.en.description}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  en: { ...formData.en, description: e.target.value },
-                })
-              }
-              className="bg-gray-700 text-gray-100 border-gray-600 min-h-[80px]"
-            />
-          </div>
+
+      <div className=" p-4 rounded-lg mt-10">
+        <label className=" text-gray-300">Title</label>
+        <div className=" flex flex-row gap-3">
+          <Input
+            placeholder="Title (En)"
+            value={formData.en.title}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                en: { ...formData.en, title: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600"
+          />
+          <Input
+            placeholder="Titre (Fr)"
+            value={formData.fr.title}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                fr: { ...formData.fr, title: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600 "
+          />
         </div>
-        <div className="bg-gray-800 p-4 rounded-lg border border-gray-600">
-          <h4 className="text-lg font-semibold text-green-400 mb-3">French</h4>
-          <div className="space-y-3">
-            <Input
-              value={formData.fr.title}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  fr: { ...formData.fr, title: e.target.value },
-                })
-              }
-              className="bg-gray-700 text-gray-100 border-gray-600"
-            />
-            <Textarea
-              value={formData.fr.description}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  fr: { ...formData.fr, description: e.target.value },
-                })
-              }
-              className="bg-gray-700 text-gray-100 border-gray-600 min-h-[80px]"
-            />
-          </div>
+      </div>
+      <div className=" p-4 rounded-lg  mb-6 ">
+        <label className=" text-gray-300">Description</label>
+        <div className=" flex flex-row gap-3">
+          <Textarea
+            placeholder="Description (En)"
+            value={formData.en.description}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                en: { ...formData.en, description: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600 min-h-[80px]"
+          />
+          <Textarea
+            placeholder="Description (Fr)"
+            value={formData.fr.description}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                fr: { ...formData.fr, description: e.target.value },
+              })
+            }
+            className="bg-gray-900 text-gray-100 border-gray-600 min-h-[80px]"
+          />
         </div>
-        <div className="flex gap-3 pt-4">
-          <Button
-            onClick={handleSubmit}
-            className="bg-green-700 hover:bg-green-600"
-          >
-            <Save size={18} className="mr-2" /> Save Changes
-          </Button>
-          <Button
-            onClick={onCancel}
-            variant="outline"
-            className="border-gray-600 text-gray-300 hover:bg-gray-600"
-          >
-            <X size={18} className="mr-2" /> Cancel
-          </Button>
-        </div>
+      </div>
+      <div className="flex gap-3 pt-4">
+        <Button
+          onClick={handleSubmit}
+          className="bg-green-700 hover:bg-green-600"
+        >
+          <Save size={18} className="mr-2" /> Save Changes
+        </Button>
+
+        <Button
+          onClick={onCancel}
+          variant="outline"
+
+        >
+          <X size={18} className="mr-2" /> Cancel
+        </Button>
       </div>
     </div>
   );
 }
 
-// MAIN COMPONENT
+// ------------------------- MAIN COMPONENT -------------------------
 function OurValues() {
   const [values, setValues] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingValueId, setEditingValueId] = useState(null);
   const [message, setMessage] = useState("");
+  const [previewLang, setPreviewLang] = useState("en");
 
   const docRef = doc(db, "content", "Value");
 
-  // 1. FETCH DATA ON LOAD
   useEffect(() => {
     const fetchValues = async () => {
       try {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          // Assuming the field name inside the document is 'valuesList'
           setValues(docSnap.data().valuesList || []);
         } else {
-          // If document doesn't exist, we can initialize it later on first add
           setValues([]);
         }
       } catch (error) {
@@ -299,12 +279,10 @@ function OurValues() {
     setTimeout(() => setMessage(""), 3000);
   };
 
-  // HELPER TO SYNC WITH FIRESTORE
   const updateFirestore = async (newValuesList) => {
     try {
-      // We use setDoc with merge: true to handle cases where doc might not exist yet
       await setDoc(docRef, { valuesList: newValuesList }, { merge: true });
-      setValues(newValuesList); // Update local state only after successful DB write
+      setValues(newValuesList);
       return true;
     } catch (error) {
       console.error("Error updating database:", error);
@@ -314,8 +292,8 @@ function OurValues() {
   };
 
   const handleAddValue = async (newValue) => {
-    const itemToAdd = { ...newValue, id: Date.now() };
-    const updatedList = [...values, itemToAdd];
+    const item = { ...newValue, id: Date.now() };
+    const updatedList = [...values, item];
 
     const success = await updateFirestore(updatedList);
     if (success) {
@@ -328,10 +306,9 @@ function OurValues() {
     if (!window.confirm("Delete this value?")) return;
 
     const updatedList = values.filter((value) => value.id !== id);
+
     const success = await updateFirestore(updatedList);
-    if (success) {
-      showMessage("Value deleted successfully!");
-    }
+    if (success) showMessage("Value deleted successfully!");
   };
 
   const handleSaveValue = async (updatedValue) => {
@@ -347,7 +324,7 @@ function OurValues() {
   };
 
   return (
-    <div className="bg-gray-800 rounded-2xl mt-10 p-6 border border-gray-700">
+    <div className="mt-10 p-6">
       {message && (
         <div
           className={`mb-6 p-4 rounded-lg ${
@@ -360,30 +337,45 @@ function OurValues() {
         </div>
       )}
 
+      {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-gray-100">Our Values</h2>
-        <Button
-          onClick={() => setShowAddForm(true)}
-          className="bg-green-700 hover:bg-green-600"
-        >
-          <Plus size={18} className="mr-2" /> Add Value
-        </Button>
+        <h2 className="text-2xl font-semibold tracking-tight text-gray-100">
+          Our Values
+        </h2>
+
+        <div className="flex items-center gap-3">
+          <LanguageToggle
+            previewLang={previewLang}
+            setPreviewLang={setPreviewLang}
+          />
+
+          <Button
+            onClick={() => setShowAddForm(true)}
+            className="bg-green-700 hover:bg-green-600"
+          >
+            <Plus size={18} className="mr-2" /> Add Value
+          </Button>
+        </div>
       </div>
 
+      {/* Add Form */}
       {showAddForm && (
         <AddValueForm
+          lang={previewLang}
           onAdd={handleAddValue}
           onCancel={() => setShowAddForm(false)}
           onMessage={showMessage}
         />
       )}
 
+      {/* Values List */}
       <div className="space-y-4">
         {values.map((value) => (
           <div key={value.id}>
             {editingValueId === value.id ? (
               <ValueEditForm
                 value={value}
+                lang={previewLang}
                 onSave={handleSaveValue}
                 onCancel={() => setEditingValueId(null)}
                 onMessage={showMessage}
@@ -391,6 +383,7 @@ function OurValues() {
             ) : (
               <ValueCard
                 value={value}
+                lang={previewLang}
                 onEdit={(value) => setEditingValueId(value.id)}
                 onDelete={handleDeleteValue}
               />

@@ -142,7 +142,7 @@ function Chart() {
   };
 
   return (
-    <div className="bg-gray-800 rounded-2xl mt-10 p-6 border border-gray-700">
+    <div className="mt-10 p-6 ">
       {message && (
         <div
           className={`mb-6 p-4 rounded-lg ${
@@ -157,12 +157,10 @@ function Chart() {
 
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-semibold text-gray-100">
+          <h2 className="text-2xl font-semibold tracking-tight  text-gray-100">
             Club Statistics
           </h2>
-          <p className="text-gray-400 text-sm mt-1">
-            Manage members and events data by year
-          </p>
+
         </div>
         <Button
           onClick={() => {
@@ -178,7 +176,7 @@ function Chart() {
 
       {/* Add/Edit Form - Minimal Row */}
       {(showAddForm || editingYear) && (
-        <div className="mb-6 bg-gray-700 border border-gray-600 rounded-lg p-4">
+        <div className="mb-6 bg-gray-800 border border-gray-600 rounded-lg p-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
             <div>
               <label className="block text-xs font-medium text-gray-300 mb-1">
@@ -191,7 +189,7 @@ function Chart() {
                   setFormData({ ...formData, year: parseInt(e.target.value) })
                 }
                 disabled={editingYear !== null}
-                className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400"
+                className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400"
                 min="2016"
               />
             </div>
@@ -206,7 +204,7 @@ function Chart() {
                 onChange={(e) =>
                   setFormData({ ...formData, members: e.target.value })
                 }
-                className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400"
+                className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400"
                 min="0"
               />
             </div>
@@ -221,7 +219,7 @@ function Chart() {
                 onChange={(e) =>
                   setFormData({ ...formData, events: e.target.value })
                 }
-                className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400"
+                className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400"
                 min="0"
               />
             </div>
@@ -246,7 +244,6 @@ function Chart() {
                   });
                 }}
                 variant="outline"
-                className="border-gray-600 text-gray-300 hover:bg-gray-600"
                 size="sm"
               >
                 <X size={16} />
@@ -331,19 +328,19 @@ function Chart() {
       {/* Summary */}
       {chartData.length > 0 && (
         <div className="mt-6 grid grid-cols-3 gap-4">
-          <div className="bg-gray-700 rounded-lg p-3 text-center">
+          <div className="bg-gray-800 rounded-lg p-3 text-center">
             <p className="text-gray-400 text-xs">Total Years</p>
             <p className="text-2xl font-bold text-gray-100 mt-1">
               {chartData.length}
             </p>
           </div>
-          <div className="bg-gray-700 rounded-lg p-3 text-center">
+          <div className="bg-gray-800 rounded-lg p-3 text-center">
             <p className="text-gray-400 text-xs">Total Members</p>
             <p className="text-2xl font-bold text-blue-400 mt-1">
               {chartData.reduce((sum, d) => sum + d.members, 0)}
             </p>
           </div>
-          <div className="bg-gray-700 rounded-lg p-3 text-center">
+          <div className="bg-gray-800 rounded-lg p-3 text-center">
             <p className="text-gray-400 text-xs">Total Events</p>
             <p className="text-2xl font-bold text-green-400 mt-1">
               {chartData.reduce((sum, d) => sum + d.events, 0)}

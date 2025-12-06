@@ -5,7 +5,7 @@ const sections = [
   { id: "who-we-are", title: "Who We Are" },
   { id: "hierarchy", title: "Hierarchy" },
   { id: "our-values", title: "Our Values" },
-  { id:"chart" , title : "Chart" },
+  { id: "chart", title: "Chart" },
 ];
 
 const About = () => {
@@ -13,32 +13,50 @@ const About = () => {
   const [selectedSection, setSelectedSection] = useState(null);
 
   return (
-    <div className="p-6">
-      <div className="flex flex-col gap-4">
-        <h1 className=" font-bold text-6xl text-white">About page</h1>
-        <p className="text-gray-400 text-lg">
-          Manage your about page content
-        </p>
+    <div className="p-6 text-white">
+      {/* Header */}
+      <div className="flex flex-col gap-2 mb-10">
+        <h1 className="font-semibold text-5xl tracking-tight">About Page</h1>
+        <p className="text-gray-400 text-lg">Manage your About Page content</p>
       </div>
-      <div className=" flex flex-row gap-8 w-full mt-10 border-b border-gray-700 ">
+
+      {/* Elegant Tab Navigation */}
+      <div className="flex gap-6 border-b border-gray-800 pb-2">
         {sections.map((section) => (
-          <div
+          <button
             key={section.id}
             onClick={() => {
               setSelectedSection(section.id);
               navigate(`/about/${section.id}`);
             }}
-            className={` py-5 text-gray-400 font-semibold ${
-              selectedSection === section.id
-                ? "border-b-2 border-green-600 text-white"
-                : "hover:text-white hover:border-b-2 hover:border-gray-600"
-            } cursor-pointer inline-block mr-6 pb-2 mt-6`}
+            className={`
+              relative pb-3 px-1 text-sm font-medium transition-all
+              ${
+                selectedSection === section.id
+                  ? "text-white"
+                  : "text-gray-400 hover:text-gray-200"
+              }
+            `}
           >
             {section.title}
-          </div>
+
+            {/* Active underline */}
+            <span
+              className={`
+                absolute left-0 right-0 -bottom-[2px] h-[2px] rounded-full transition-all
+                ${
+                  selectedSection === section.id
+                    ? "bg-green-600"
+                    : "bg-transparent"
+                }
+              `}
+            ></span>
+          </button>
         ))}
       </div>
-      <main>
+
+      {/* Content */}
+      <main className="mt-6">
         <Outlet />
       </main>
     </div>

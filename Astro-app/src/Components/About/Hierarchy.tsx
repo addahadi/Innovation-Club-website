@@ -2,17 +2,37 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+// Import Firebase tools
+import { collection, getDocs, type DocumentData } from "firebase/firestore";
+import db from "../../../db/firebase"; // Assume correct path to your firebase config
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface HierarchyProps {
-  language: {
-    title: string;
-    content: string;
+// Define the structure for the hardcoded members array
+interface Member {
+  name: string;
+  img: string;
+  tasks: string;
+}
+
+// Define the structure for fetched department data
+interface DepartmentData {
+  name: string;
+  description: string;
+  lead: {
+    picture: string;
   };
 }
 
-const members = [
+interface HierarchyProps {
+  language: {
+    type: "en" | "fr";
+    content: any; // Assuming translation content structure
+  };
+}
+
+// Hardcoded members array to define the structure/steps
+const members: Member[] = [
   {
     name: "President",
     img: "/unknown.png",
@@ -66,6 +86,9 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
   const [nodeSize, setNodeSize] = useState(55);
   const [bellSize, setBellSize] = useState(140);
 
+  // State to hold fetched and merged data
+  const [fetchedMembers, setFetchedMembers] = useState<Member[]>(members);
+
   // Refs
   const svgRef = useRef<SVGSVGElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -75,7 +98,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
   const headerRef = useRef<HTMLDivElement>(null);
   const treeContainerRef = useRef<HTMLDivElement>(null);
 
-  // Connections between nodes
+  // Connections
   const connections = [
     [0, 1],
     [0, 2],
@@ -87,6 +110,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
     [2, 8],
   ];
 
+  // Helper function to get positions
   const getRelativePositions = () => {
     const isMobile = window.innerWidth < 768;
     if (isMobile) {
@@ -121,6 +145,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
     Record<number, { x: number; y: number }>
   >({});
 
+  // Effect for updating positions on resize
   useEffect(() => {
     const updatePositions = () => {
       const container = svgRef.current?.getBoundingClientRect();
@@ -134,7 +159,8 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
         const id = Number(key);
         newPositions[id] = {
           //@ts-ignore
-          x: (relativePositions[id].x / 100) * width,y: (relativePositions[id].y / 100) * height,
+          x: (relativePositions[id].x / 100) * width,
+          y: (relativePositions[id].y / 100) * height,
         };
       }
 
@@ -146,10 +172,57 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
     return () => window.removeEventListener("resize", updatePositions);
   }, []);
 
-  // ✨ scroll-based fade for text and image
+  // --- Data Fetching and Merging ---
+  useEffect(() => {
+    fetchDepartmentData();
+  }, [language.type]);
+
+  async function fetchDepartmentData() {
+    try {
+      const departmentsCollectionRef = collection(db, "departments");
+      const snapshot = await getDocs(departmentsCollectionRef);
+
+      const fetchedData: DepartmentData[] = [];
+      const langKey = language.type;
+
+      snapshot.forEach((doc) => {
+        const data = doc.data() as DocumentData;
+        if (data[langKey]) {
+          fetchedData.push({
+            name: data[langKey].name || "Department Name Missing",
+            description: data[langKey].description || "Description Missing",
+            lead: {
+              picture: data[langKey].lead?.picture || "/unknown.png",
+            },
+          });
+        }
+      });
+
+      // Map fetched data onto the hardcoded structure by index
+      const newFetchedMembers: Member[] = members.map((member, index) => {
+        const fetchedItem = fetchedData[index];
+        if (fetchedItem) {
+          return {
+            name: fetchedItem.name,
+            img: fetchedItem.lead.picture,
+            tasks: fetchedItem.description,
+          };
+        }
+        // If no fetched data for this index, fall back to hardcoded defaults
+        return member;
+      });
+
+      setFetchedMembers(newFetchedMembers);
+      console.log("Fetched and Merged Hierarchy Data:", newFetchedMembers);
+    } catch (error) {
+      console.error("Error fetching department data:", error);
+      // On error, revert to the hardcoded structure
+      setFetchedMembers(members);
+    }
+  }
+
   useEffect(() => {
     if (!sectionRef.current) return;
-
     const nameEl = nameRef.current;
     const taskEl = taskRef.current;
     const imgEl = imgRef.current;
@@ -217,9 +290,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
     });
   }, [step, positions]);
 
-  
-
-  // Animate header section and tree container
+  // Animate header section and tree container - FIXED
   useEffect(() => {
     if (headerRef.current) {
       gsap.from(headerRef.current.querySelector("h2"), {
@@ -247,6 +318,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
       });
     }
 
+    // FIXED: Removed opacity animation from tree container
     if (treeContainerRef.current) {
       gsap.from(treeContainerRef.current, {
         scrollTrigger: {
@@ -255,7 +327,8 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
           end: "top 30%",
           scrub: true,
         },
-        opacity: 0,
+        y: 30,
+        scale: 0.95,
         duration: 1.2,
       });
     }
@@ -300,10 +373,10 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
         ref={headerRef}
       >
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-          {language.title}
+          {language.content.title}
         </h2>
         <p className="text-base sm:text-lg lg:text-xl text-gray-400 mb-8 sm:mb-12">
-          {language.content}
+          {language.content.content}
         </p>
       </div>
 
@@ -316,20 +389,20 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
           <div className="max-md:w-full max-md:h-[150px]">
             <img
               ref={imgRef}
-              src={members[step]?.img}
-              alt={members[step]?.name}
+              src={fetchedMembers[step]?.img}
+              alt={fetchedMembers[step]?.name}
               className="rounded-3xl shadow-lg max-w-[650px] w-full h-auto object-contain"
             />
           </div>
           <div className="mt-4 max-md:px-3">
             <h2 ref={nameRef} className="text-4xl font-bold text-white mb-3">
-              {members[step]?.name}
+              {fetchedMembers[step]?.name}
             </h2>
             <p
               ref={taskRef}
               className="text-lg text-gray-400 leading-relaxed max-w-md"
             >
-              {members[step]?.tasks}
+              {fetchedMembers[step]?.tasks}
             </p>
           </div>
         </div>
@@ -418,7 +491,7 @@ const ClubHierarchy: React.FC<HierarchyProps> = ({ language }) => {
             </button>
             <button
               onClick={() =>
-                setStep((prev) => Math.min(prev + 1, members.length - 1))
+                setStep((prev) => Math.min(prev + 1, fetchedMembers.length - 1))
               }
               className="cursor-pointer border border-white rounded-full w-[50px] aspect-square flex justify-center items-center p-2 hover:bg-white transition-colors"
             >

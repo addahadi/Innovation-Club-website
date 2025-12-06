@@ -24,22 +24,35 @@ import Header from '../../Layouts/Header.astro';
         <div class="flex flex-col">
             {/* Hero Section - WhoWeAre */}
             <section class="mb-24 sm:mb-32">
-                <WhoWeAre language={about.Who_we_are} />
+                <WhoWeAre language={{
+                    type : "en",
+                    content : about.Who_we_are
+                }} client:load/>
             </section>
 
             {/* Hierarchy Section */}
             <section class="mb-24 sm:mb-32">
-                <Hierarchy language={about.Hierarchy} client:only />
+                <Hierarchy language={{
+                    type : "en",
+                    content : about.Hierarchy
+                    
+                }} client:only />
             </section>
 
             {/* Chart Section */}
             <section class="mb-24 sm:mb-32">
-                <Chart language={about.Events_and_Members} client:load />
+                <Chart language={{
+                    type : "en",
+                    content : about.Events_and_Members
+                }} client:load />
             </section>
 
             {/* Values Section */}
             <section class="mb-24 sm:mb-32">
-                <ValuesComponent language={about.Our_Values} client:load />
+                <ValuesComponent language={{
+                    type : "en",
+                    content : about.Our_Values
+                }} client:load />
             </section>
 
             {/* Footer */}

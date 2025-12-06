@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Image, Upload, X, Globe } from "lucide-react";
+import { Image, Upload, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -129,23 +129,58 @@ const GetToKnowUs = () => {
         ))}
       </div>
 
-      {/* English Section */}
-      <LanguageSection
-        language="English"
-        leftText={aboutUs.en.leftText}
-        rightText={aboutUs.en.rightText}
-        onLeftTextChange={(val) => handleTextChange("en", "leftText", val)}
-        onRightTextChange={(val) => handleTextChange("en", "rightText", val)}
-      />
+      {/* Combined Language Section */}
+      <div className="bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-700 space-y-6">
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Left Text
+            </label>
+            <div className="flex gap-4">
+              <Textarea
+                value={aboutUs.en.leftText}
+                onChange={(e) =>
+                  handleTextChange("en", "leftText", e.target.value)
+                }
+                placeholder="Enter English text here..."
+                className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 min-h-[120px] flex-1"
+              />
+              <Textarea
+                value={aboutUs.fr.leftText}
+                onChange={(e) =>
+                  handleTextChange("fr", "leftText", e.target.value)
+                }
+                placeholder="Entrez le texte français ici..."
+                className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 min-h-[120px] flex-1"
+              />
+            </div>
+          </div>
 
-      {/* French Section */}
-      <LanguageSection
-        language="French"
-        leftText={aboutUs.fr.leftText}
-        rightText={aboutUs.fr.rightText}
-        onLeftTextChange={(val) => handleTextChange("fr", "leftText", val)}
-        onRightTextChange={(val) => handleTextChange("fr", "rightText", val)}
-      />
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Right Text
+            </label>
+            <div className="flex gap-4">
+              <Textarea
+                value={aboutUs.en.rightText}
+                onChange={(e) =>
+                  handleTextChange("en", "rightText", e.target.value)
+                }
+                placeholder="Enter English text here..."
+                className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 min-h-[120px] flex-1"
+              />
+              <Textarea
+                value={aboutUs.fr.rightText}
+                onChange={(e) =>
+                  handleTextChange("fr", "rightText", e.target.value)
+                }
+                placeholder="Entrez le texte français ici..."
+                className="bg-gray-900 border-gray-600 text-white placeholder-gray-400 min-h-[120px] flex-1"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
       <Button
         onClick={saveData}
@@ -216,40 +251,5 @@ const ImageUpload = ({
         </label>
       </div>
     )}
-  </div>
-);
-
-const LanguageSection = ({
-  language,
-  leftText,
-  rightText,
-  onLeftTextChange,
-  onRightTextChange,
-}) => (
-  <div className="bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-700 space-y-6">
-    <div className="flex items-center gap-2 mb-6">
-      <Globe className="w-6 h-6 text-green-400" />
-      <h2 className="text-2xl font-bold text-white">{language} Section</h2>
-    </div>
-
-    <div >
-       <label className="block text-sm font-medium text-gray-300 mb-2">Left Text</label>
-      <Textarea
-        value={leftText}
-        onChange={(e) => onLeftTextChange(e.target.value)}
-        placeholder="Enter your text here..."
-        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 min-h-[120px]"
-      />
-    </div>
-
-    <div >
-       <label className="block text-sm font-medium text-gray-300 mb-2">Right Text</label>
-      <Textarea
-        value={rightText}
-        onChange={(e) => onRightTextChange(e.target.value)}
-        placeholder="Enter your text here..."
-        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 min-h-[120px]"
-      />
-    </div>
   </div>
 );

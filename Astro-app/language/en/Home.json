@@ -1,9 +1,7 @@
 {
   "hero": {
     "title": "Innovation Team",
-    "subtitle": "At the University of Tiaret,\nThe Innovation Team unites creative and ambitious students to explore ideas, technology, and entrepreneurship.",
-    "subtitle_2": "Explore innovation, creativity, and technology",
-    "subtitle_3": "Through hands-on projects, teamwork, and inspiring events.",
+    "description": "At the University of Tiaret,\nThe Innovation Team unites creative and ambitious students to explore ideas, technology, and entrepreneurship.Explore innovation, creativity, and technology Through hands-on projects, teamwork, and inspiring events.",
     "joinButton": "join"
   },
   "Get_to": {

@@ -14,6 +14,7 @@ import {
   updateEvent,
   deleteEvent,
 } from "../../db/firebase";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export default function Event() {
   const [events, setEvents] = useState([]);
@@ -110,46 +111,25 @@ export default function Event() {
   return (
     <div className="min-h-screen bg-gray-900 p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-10">
           <div>
-            <h1 className="text-3xl font-bold text-white mb-2">
+            <h1 className="text-4xl font-semibold tracking-tight text-white">
               Event Management
             </h1>
-            <p className="text-gray-400">
-              Create and manage your bilingual events
+            <p className="text-gray-400 mt-1">
+              Create, edit, and manage bilingual events
             </p>
           </div>
-          <div className="flex gap-3 items-center">
-            <div className="flex gap-2 bg-gray-800 rounded-lg p-1 border border-gray-700">
-              <Button
-                size="sm"
-                onClick={() => setPreviewLang("en")}
-                className={
-                  previewLang === "en"
-                    ? "bg-green-700 hover:bg-green-800 text-white"
-                    : "bg-transparent text-gray-400 hover:bg-gray-700"
-                }
-              >
-                <Globe className="w-4 h-4 mr-1" />
-                EN
-              </Button>
-              <Button
-                size="sm"
-                onClick={() => setPreviewLang("fr")}
-                className={
-                  previewLang === "fr"
-                    ? "bg-green-700 hover:bg-green-800 text-white"
-                    : "bg-transparent text-gray-400 hover:bg-gray-700"
-                }
-              >
-                <Globe className="w-4 h-4 mr-1" />
-                FR
-              </Button>
-            </div>
+
+          <div className="flex items-center gap-3">
+            <LanguageToggle previewLang={previewLang} setPreviewLang={setPreviewLang} />
+
+            {/* Create Button */}
             <Button
               onClick={() => handleOpenForm()}
-              className="bg-green-700 hover:bg-green-800 text-white"
               disabled={isLoading}
+              className="bg-green-700 hover:bg-green-800 text-white rounded-xl px-4 py-2"
             >
               <Plus className="w-4 h-4 mr-2" />
               Create Event
@@ -157,38 +137,41 @@ export default function Event() {
           </div>
         </div>
 
-        {/* Loading State */}
+        {/* Loading */}
         {isLoading && (
-          <div className="flex justify-center items-center py-12">
-            <Loader2 className="w-8 h-8 text-green-700 animate-spin mr-3" />
-            <p className="text-white text-lg">Loading Events...</p>
+          <div className="flex justify-center items-center py-16">
+            <Loader2 className="w-8 h-8 text-green-600 animate-spin" />
+            <p className="text-gray-300 ml-3 text-lg">Loading events...</p>
           </div>
         )}
 
-        {/* Error State */}
+        {/* Error */}
         {error && (
-          <div className="bg-red-900/50 border border-red-700 p-4 rounded-lg mb-6">
-            <p className="text-red-300 font-medium">Error: {error}</p>
+          <div className="bg-red-900/40 border border-red-600 text-red-300 px-4 py-3 rounded-lg mb-6">
+            {error}
           </div>
         )}
 
         {/* Empty State */}
-        {!isLoading && events.length === 0 ? (
-          <Card className="bg-gray-800 border-gray-700">
-            <CardContent className="flex flex-col items-center justify-center py-12">
+        {!isLoading && events.length === 0 && (
+          <Card className="bg-gray-800/60 backdrop-blur border border-gray-700 rounded-xl">
+            <CardContent className="flex flex-col items-center justify-center py-16">
               <Calendar className="w-16 h-16 text-gray-600 mb-4" />
-              <p className="text-gray-400 text-lg mb-4">No events yet</p>
+              <p className="text-gray-400 text-lg mb-6">No events added yet</p>
+
               <Button
                 onClick={() => handleOpenForm()}
-                className="bg-green-700 hover:bg-green-800 text-white"
+                className="bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-xl"
               >
                 Create Your First Event
               </Button>
             </CardContent>
           </Card>
-        ) : (
-          /* Event List */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        )}
+
+        {/* Event List */}
+        {!isLoading && events.length > 0 && (
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => (
               <EventCard
                 key={event.id}
@@ -201,6 +184,7 @@ export default function Event() {
           </div>
         )}
 
+        {/* Delete Confirmation Dialog */}
         <DeleteConfirmDialog
           isOpen={!!deleteConfirm}
           onClose={() => setDeleteConfirm(null)}
@@ -209,4 +193,5 @@ export default function Event() {
       </div>
     </div>
   );
+
 }

@@ -2,10 +2,12 @@ import { Edit2, Save, X } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // FIREBASE IMPORTS
 import { db } from "../../../db/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import LanguageToggle from "../LanguageToggle";
 
 const WhoWeAre = () => {
   const [content, setContent] = useState({
@@ -16,6 +18,7 @@ const WhoWeAre = () => {
   const [tempContent, setTempContent] = useState({ en: "", fr: "" });
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [previewLang, setPreviewLang] = useState("en");
 
   // Reference to the specific document
   const docRef = doc(db, "content", "Whoweare");
@@ -75,17 +78,19 @@ const WhoWeAre = () => {
 
   if (loading) {
     return (
-      <div className="bg-gray-800 rounded-2xl mt-10 p-6 mb-8 border border-gray-700">
-        <p className="text-gray-400">Loading content...</p>
-      </div>
+      <Card className=" mt-10">
+        <CardContent className="pt-6">
+          <p className="text-gray-400">Loading content...</p>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="bg-gray-800 rounded-2xl mt-10 p-6 mb-8 border border-gray-700">
+    <Card className=" border-none bg-gray-900  mt-10">
       {message && (
         <div
-          className={`mb-6 p-4 rounded-lg ${
+          className={`m-6 mb-0 p-4 rounded-lg ${
             message.includes("Error")
               ? "bg-red-500/20 text-red-300 border border-red-500"
               : "bg-green-500/20 text-green-300 border border-green-500"
@@ -95,98 +100,89 @@ const WhoWeAre = () => {
         </div>
       )}
 
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-gray-100">Who We Are</h2>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="text-2xl text-gray-100 tracking-tight">
+          Who We Are
+        </CardTitle>
         {!isEditing && (
-          <Button
-            onClick={handleEdit}
-            className="bg-transparent hover:bg-gray-700 text-green-400 hover:text-green-300 transition-colors p-2"
-          >
-            <Edit2 size={18} className="mr-2" />
-          </Button>
+          <div className=" flex items-center gap-3">
+            <LanguageToggle
+              previewLang={previewLang}
+              setPreviewLang={setPreviewLang}
+            />
+            <Button
+              onClick={handleEdit}
+              className="bg-transparent hover:bg-gray-700 text-green-400 hover:text-green-300 transition-colors p-2"
+            >
+              <Edit2 size={18} />
+            </Button>
+          </div>
         )}
-      </div>
+      </CardHeader>
 
-      {isEditing ? (
-        <div className="space-y-6">
-          {/* English Section */}
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              English
-            </label>
-            <Textarea
-              value={tempContent.en}
-              onChange={(e) =>
-                setTempContent({ ...tempContent, en: e.target.value })
-              }
-              placeholder="Enter your organization's description in English..."
-              className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[120px]"
-            />
-          </div>
-
-          {/* French Section */}
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              French
-            </label>
-            <Textarea
-              value={tempContent.fr}
-              onChange={(e) =>
-                setTempContent({ ...tempContent, fr: e.target.value })
-              }
-              placeholder="Entrez la description de votre organisation en français..."
-              className="bg-gray-800 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[120px]"
-            />
-          </div>
-
-          <div className="flex gap-3">
-            <Button
-              onClick={handleSave}
-              className="bg-green-700 hover:bg-green-600 text-white"
-            >
-              <Save size={18} className="mr-2" />
-              Save
-            </Button>
-            <Button
-              onClick={handleCancel}
-              variant="outline"
-              className="border-gray-600 hover:bg-gray-700"
-            >
-              <X size={18} className="mr-2" />
-              Cancel
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {/* English Content */}
-          {content.en && (
+      <CardContent>
+        {isEditing ? (
+          <div className="space-y-6">
+            {/* English Section */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-2">
-                English
-              </h3>
-              <p className="text-gray-300 leading-relaxed">{content.en}</p>
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Description
+              </label>
+              <div className=" flex flex-row gap-3">
+                <Textarea
+                  value={tempContent.en}
+                  onChange={(e) =>
+                    setTempContent({ ...tempContent, en: e.target.value })
+                  }
+                  placeholder="Enter your organization's description in English..."
+                  className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[120px]"
+                />
+                <Textarea
+                  value={tempContent.fr}
+                  onChange={(e) =>
+                    setTempContent({ ...tempContent, fr: e.target.value })
+                  }
+                  placeholder="Entrez la description de votre organisation en français..."
+                  className="bg-gray-900 text-gray-100 border-gray-600 placeholder-gray-400 min-h-[120px]"
+                />
+              </div>
             </div>
-          )}
 
-          {/* French Content */}
-          {content.fr && (
-            <div>
-              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-2">
-                French
-              </h3>
-              <p className="text-gray-300 leading-relaxed">{content.fr}</p>
+            <div className="flex gap-3 pt-4">
+              <Button
+                onClick={handleSave}
+                className="bg-green-700 hover:bg-green-600 text-white"
+              >
+                <Save size={18} className="mr-2" />
+                Save
+              </Button>
+              <Button onClick={handleCancel} variant="outline">
+                <X size={18} className="mr-2" />
+                Cancel
+              </Button>
             </div>
-          )}
-
-          {!content.en && !content.fr && (
-            <p className="text-gray-500 italic">
-              No content added yet. Click the edit icon to add content.
-            </p>
-          )}
-        </div>
-      )}
-    </div>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {previewLang === "en" ? (
+              <div className=" bg-gray-800 border-gray-600 p-4 rounded-lg">
+                <h3 className="text-sm font-semibold text-gray-400 uppercase mb-2">
+                  English
+                </h3>
+                <p className="text-gray-300 leading-relaxed">{content.en}</p>
+              </div>
+            ) : (
+              <div className=" bg-gray-800 border-gray-600 p-4 rounded-lg">
+                <h3 className="text-sm font-semibold text-gray-400 uppercase mb-2">
+                  French
+                </h3>
+                <p className="text-gray-300 leading-relaxed">{content.fr}</p>
+              </div>
+            )}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 

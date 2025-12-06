@@ -61,8 +61,8 @@ export default function AdminClubSetting() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 p-6">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-semibold mb-6 text-green-700">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-4xl font-semibold tracking-tight text-white mb-10">
           Club Settings
         </h1>
 
