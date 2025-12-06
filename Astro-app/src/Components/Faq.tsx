@@ -39,9 +39,9 @@ const FaqSkeleton = () => (
 export default function FAQ({ language }: { language: any }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [faqData, setFaqData] = useState<FaqItem[]>([]);
-  // 1. Add loading state
   const [isLoading, setIsLoading] = useState(true);
   const headingRef = useRef(null);
+  const faqContainerRef = useRef(null);
 
   const toggleFAQ = (index: number | null) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -52,7 +52,6 @@ export default function FAQ({ language }: { language: any }) {
   }, [language.type]);
 
   async function fetchData() {
-    // Set loading to true before the fetch starts
     setIsLoading(true);
     try {
       const faqsCollectionRef = collection(db, "faqs");
@@ -77,57 +76,76 @@ export default function FAQ({ language }: { language: any }) {
       console.error("Error fetching FAQ data:", error);
       setFaqData([]);
     } finally {
-      // Set loading to false when the fetch is complete (success or error)
       setIsLoading(false);
     }
   }
 
-  // Update GSAP useEffect to depend on loading state and data
+  // Updated GSAP useEffect with fixes
   useEffect(() => {
-    // Stop animation setup if data is still loading
-    if (isLoading) {
+    if (isLoading || faqData.length === 0) {
       return;
     }
 
-    // GSAP animation logic
-    gsap.from(headingRef.current, {
-      scrollTrigger: {
-        trigger: headingRef.current,
-        start: "top 80%",
-        end: "top 20%",
-        scrub: true,
-      },
-      opacity: 0,
-      y: 100,
-      duration: 1,
-    });
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      // Set initial state for heading before animating
+      if (headingRef.current) {
+        gsap.set(headingRef.current, { opacity: 0, y: 100 });
 
-    const questions = gsap.utils.toArray(".faq-item");
+        gsap.to(headingRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 80%",
+            end: "top 50%",
+            scrub: 1,
+            toggleActions: "play none none reverse",
+            // markers: true, // Uncomment for debugging
+          },
+        });
+      }
 
-    questions.forEach((el: any) => {
-      gsap.from(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: "top 80%",
-          end: "top 20%",
-          scrub: true,
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
+      // Animate FAQ items
+      const questions = gsap.utils.toArray(".faq-item");
+
+      questions.forEach((el: any) => {
+        // Set initial state before animating
+        gsap.set(el, { opacity: 0, y: 50 });
+
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            end: "top 60%",
+            scrub: 1,
+            toggleActions: "play none none reverse",
+            // markers: true, // Uncomment for debugging
+          },
+        });
       });
-    });
 
-    // Cleanup function for ScrollTrigger
+      // Refresh ScrollTrigger after all animations are set up
+      ScrollTrigger.refresh();
+    }, 100);
+
+    // Cleanup function
     return () => {
+      clearTimeout(timer);
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [isLoading, faqData.length]); // Dependencies added
+  }, [isLoading, faqData.length]);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-      <div>
-        {/* Heading remains the same */}
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div ref={faqContainerRef}>
+        {/* Heading */}
         <h2
           ref={headingRef}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8 sm:mb-12"
@@ -135,7 +153,7 @@ export default function FAQ({ language }: { language: any }) {
           {language.content.FAQ.title}
         </h2>
 
-        {/* 3. Conditional Rendering */}
+        {/* Conditional Rendering */}
         {isLoading ? (
           <FaqSkeleton />
         ) : faqData.length > 0 ? (
@@ -167,7 +185,6 @@ export default function FAQ({ language }: { language: any }) {
             ))}
           </div>
         ) : (
-          // Handle case where data loading is complete but no FAQs were found
           <div className="text-gray-500 text-center py-10">
             No Frequently Asked Questions are currently available.
           </div>
