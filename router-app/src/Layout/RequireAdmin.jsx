@@ -1,10 +1,6 @@
-
-
-
-// src/components/RequireAdmin.jsx
 import { useEffect, useState } from "react";
 import { auth } from "../../db/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { Navigate } from "react-router-dom";
 
 export default function RequireAdmin({ children }) {
   const [loading, setLoading] = useState(true);
@@ -32,7 +28,7 @@ export default function RequireAdmin({ children }) {
   }, []);
 
   if (loading) return <p>Checking access...</p>;
-  if (!allowed) return (window.location.href = "/login");
+  if (!allowed) return <Navigate to="/login" replace />;
 
   return children;
 }

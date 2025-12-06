@@ -23,19 +23,21 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/"  element={<DashboardLayout />}>
-        <Route index element={<Home />} />
-        <Route path="/landing"  element={
+      <Route
+        path="/"
+        element={
           <RequireAdmin>
-            <Landing />
-          </RequireAdmin>}
-        >
-          <Route path="hero" element={<HeroSection/>} />
+            <DashboardLayout />
+          </RequireAdmin>
+        }
+      >
+        <Route index element={<Home />} />
+        <Route path="landing" element={<Landing />}>
+          <Route path="hero" element={<HeroSection />} />
           <Route path="faq" element={<FAQSection />} />
           <Route path="get-to-know-us" element={<GetToKnowUs />} />
-
         </Route>
-        <Route path="about" element={<About />} >
+        <Route path="about" element={<About />}>
           <Route path="who-we-are" element={<WhoWeAre />} />
           <Route path="hierarchy" element={<Hierarchy />} />
           <Route path="our-values" element={<OurValues />} />
@@ -44,9 +46,9 @@ function App() {
         <Route path="events" element={<Event />} />
         <Route path="club-settings" element={<AdminClubSetting />} />
       </Route>
-      <Route path='/login' element={<AdminLogin/>} />
+      <Route path="/login" element={<AdminLogin />} />
     </Routes>
-  )
+  );
 }
 
 export default App
