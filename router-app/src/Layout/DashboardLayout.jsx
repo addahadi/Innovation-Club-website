@@ -11,6 +11,7 @@ const DashboardLayout = () => {
     { path: "/landing", icon: Home, label: "Landing" },
     { path: "/about", icon: Boxes, label: "About" },
     { path: "/events", icon: Calendar, label: "Events" },
+    { path: "/club-settings", icon: Boxes, label: "Club Settings" },
   ];
 
   const isActive = (path) => location.pathname === path;

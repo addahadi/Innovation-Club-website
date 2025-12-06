@@ -17,6 +17,7 @@ import WhoWeAre from './components/About/WhoWeAre.jsx'
 import Hierarchy from './components/About/Hierarchy.jsx'
 import OurValues from './components/About/OurValues.jsx'
 import Chart from './components/About/Chart.jsx'
+import AdminClubSetting from './pages/AdminClubSetting.jsx'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="chart" element={<Chart />} />
         </Route>
         <Route path="events" element={<Event />} />
+        <Route path="club-settings" element={<AdminClubSetting />} />
       </Route>
       <Route path='/login' element={<AdminLogin/>} />
     </Routes>
